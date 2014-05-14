@@ -1,186 +1,227 @@
-/*
- *	Conseil de mélange de couleur 
- * 	en fonction du site demandé
- * 	--> destination enfant différence de teinte mais même valeur même saturation (jaune pétant, rouge pétant, bleu pétant)
- * 	--> destination biologie différence de saturation mais même valeur "vert d'eau" "vert pétant"
- * 	
- * 	--> colorjack.com
- * 
- * 	couleur de fond et couleur toniques
- * 	
- * 	a éviter les couleurs analogues qui se suivent sur le cercle chromatique
- * 	a éviter les couleurs opposées
- * 	
- * 	opposées secondaire 
- * 
- * 	deux choix pour mettre en évidence soit couleur opposée comme sur le bon coin
- * 	ou alors on augmente la luminositée
- * 
- */
- 
-/**********************************************************************/
-/* 							STRUCTURE DU SITE 					      */
-/**********************************************************************/
-
-body { 
-		width:auto;
-		height:auto;
-		margin:0% 5% 0% 5%;
-		font-family:Verdana,Calibri,Arial;
-		font-size:0.9em;
-		position:relative;
-        z-index:0;
+#page {
+	max-width: 1000px;
+	min-width: 200px;
+	margin: auto;
 }
 
-table {
-	font-family:Verdana,Calibri,Arial;
-	font-size:0.9em;
+#bloc label, form label  {
+	float: left;
+	clear: left;
+	margin: 4pt;
+	text-align: right;
+	font-weight : bold;
+}
+
+#contenu form label {
+	width : 150px;	
+}
+
+.bloc_inscrip {
+	float : left;
+	clear : left;	
+	margin-left : 10em;
 	
-	text-align:center; 
-	padding:0px; 
-	border-spacing:0; 
-	-moz-border-radius:5px; 
-	-webkit-border-radius:5px; 
-	-khtml-border-radius:5px;		
-	border: 1px solid black;
-
 }
 
-#header	{
-	position:relative;
-	height:200px;
-	background-color:#00759E;
-	/*background-image:url('../template/logo.png');
-	background-repeat: no-repeat no-repeat;*/
+* {
+	font-family: helvetica;
+	padding: 0px;
+	margin: 0px;
 }
 
-#login	{
-	position: relative;
-	float:right;
-	background-color:#00BDFF;
-	padding:5px;
-} 	
-
-.login input {
-	float:left;
-	clear:left;
-	width:150px;
+body {
+background-image: 	-webkit-radial-gradient(50% 50%, ellipse closest-side, white, lightblue 110%);
+background-image:   -moz-radial-gradient(50% 50%, ellipse closest-side, white, lightblue 110%);
+background-image:   -ms-radial-gradient(50% 50%, ellipse closest-side, white, lightblue 110%);
+background-image:   -o-radial-gradient(50% 50%, ellipse closest-side, white, lightblue 110%);
+background-image:   radial-gradient(50% 50%, ellipse closest-side, white, lightblue 110%); 
 }
 
 
-#menu 	{
-	float:left;
-	clear:left;
-	width:100%;
-	height:auto;
-	background-color:#009E30;
-}
-#liens  { 
-	background-color:#00DA42;
-	float:left;
-}		
-
-#contenu { 
-	float:left;
-	clear:both;
-	width:100%;
-	margin-top:2%;
-	/*background-color:#FFD75F;	*/
-	border: 3px solid #66aa22;
-	box-shadow: 8px 8px 0px #dddddd; 
-	-moz-border-radius:5px; 
-	-webkit-border-radius:5px; 
-	-khtml-border-radius:5px;
-}
-		
-#zonemessage{ 
-	float:left;
-	width:100%;
-	clear:both;
+#contenu {
+	background: white;
+	padding: 1em;
 }
 
-#zonemessage .ok {
-	background-color:#70cf49;
-	border:0px solid #70cf49;  
-}
-#zonemessage .erreur {
-	background-color:#fc4970;
-	border:0px solid #fc4970;  
-}
-#zonemessage .info {
-	background-color:#4970fc;
-	border:0px solid #4970fc;
+#contenu h1 {
+	margin-bottom : 0.8em;
 }
 
-/**********************************************************************/
-/* 								UTILS								  */
-/**********************************************************************/
-
-input:focus {
-/*
-			background-color:#ecffb8;
-*/
-			}
-
-input{
-	-moz-border-radius:5px; 
-	-webkit-border-radius:5px; 
-	-khtml-border-radius:5px;		
-	float:left;
+#contenu option,#contenu input,#contenu select,#contenu textarea,#file {
+	color: #353730;
+	font-size: 10pt;
+	margin: 4pt;
+	padding: 4pt;
+	border: 1px #868A78 solid;
+	border-radius: 4px;
 }
 
-select{
-	-moz-border-radius:5px; 
-	-webkit-border-radius:5px; 
-	-khtml-border-radius:5px;
-	float:left;
-}			
-
-.floatleft{float:left;}
-.floatright{float:right;}
-
-
-div{
-	border:0px dashed gray;
-	width:auto;
+#contenu input,#contenu select,#contenu textarea,#file {
+	float: left;
 }
 
-label{
-	float:left;
-	clear:left;
-	width:100px;
-	margin:10px;
+
+
+span {
+	float: left;
 }
-		
-fieldset{
-	float:left;
-	background-color:#FFFFFF;
-	border:2px solid black;
-	margin:3% 1% 3% 1%;
-	-moz-border-radius:5px; 
-	-webkit-border-radius:5px; 
-	-khtml-border-radius:5px;		
-} 
 
-fieldset fieldset{
-	float:left;
-	background-color:#FFFFFF;
-	border:2px solid #88bb33;
-	margin:3% 1% 3% 1%;
-	-moz-border-radius:5px; 
-	-webkit-border-radius:5px; 
-	-khtml-border-radius:5px;		
-} 
 
-legend{
-	background-color:#FFFFFF;
-	border:1px solid black;
-	-moz-border-radius:5px; 
-	-webkit-border-radius:5px; 
-	-khtml-border-radius:5px;	
-} 
+#formulaire {
+	margin-left: 28%;
+	margin-right: auto;
+}
 
-.clear{clear:both;}
+p {
+	font-family: Arial, Verdana, sans-sherif;
+	margin-left: 10px;
+	margin-right: 10px;
+}
 
-.endform{float:left; clear:both; margin-left:220px; width:auto;}
+h2 {
+	text-align: center;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
 
+#log {
+	margin-left: 2em;
+	color: white;
+}
+
+#footer {
+	background-color: rgb(150, 150, 150);
+	min-height: 8em;
+	clear: both;
+}
+
+div#colonne_gauche,div#colonne_droite,div#contenu {
+	min-height: 600px;
+}
+
+
+/* ----------- Messages ----------- */
+#message_erreur, #message_warning, #message_info {
+	padding: 20px;
+	margin-top: 5px;
+}
+
+#message_erreur img, #message_warning img, #message_info img {
+	float : left;
+}
+
+#message_erreur h3, #message_warning h3, #message_info h3 {
+	float : left;
+	margin : 1em 1em;
+}
+
+#message_erreur {
+	background: #e87979;
+	border: 3px groove #b32222;
+}
+
+#message_info
+{
+	background: lightgreen;
+	border: 3px groove green;
+}
+
+#message_warning {
+	background: orange;
+	border: 3px groove darkorange;
+}
+
+#message_info:empty, #message_warning:empty , #message_erreur:empty { display: none }
+
+/* ----------- Header ----------- */
+#header {
+	max-width: 1000px;
+	min-width: 200px;
+}
+
+div#header h1 {
+	position: absolute;
+	margin: 1.4em;
+	font-size: 3em;
+}
+
+/* ----------- Colonne contenu ----------- */
+div#contenu {
+	word-wrap: break-word;
+}
+
+
+/* ----------- Colonne Gauche ----------- */
+div#colonne_gauche {
+	float: left;
+	word-wrap: break-word;
+	margin-right : 15px;
+}
+
+div#colonne_gauche #bloc {
+	float: left;
+	clear: left;
+	width: 200px;
+	margin: 10px;
+	 border-width:1px;
+ border-style:solid;
+ border-color:grey;
+}
+
+div#colonne_gauche ul{
+	padding : 0.5em;
+	font-size : 0.8em;
+}
+
+div#colonne_gauche ul form{
+	text-align : center;
+}
+
+div#colonne_gauche li {
+	list-style-type:none;
+	padding : 0.5em;
+}
+
+div#colonne_gauche h3 {
+	background : #47a3da;
+	color: white;
+	padding: 0.5em;
+}
+
+/* ----------- Affichage Mobile ----------- */
+@media screen and (max-width: 480px) {
+	div#contenu,div#colonne_gauche,div#colonne_droite {
+		width: 100%;
+		float: left !important;
+		word-wrap: break-word;
+	}
+	div#colonne_gauche #bloc {
+		width: 100%;
+		margin: 0.5em 0 0.5em 0;
+	}
+	div#colonne_gauche,div#colonne_droite,div#contenu {
+		min-height: 0px;
+	}
+	div#header h1 {
+		position: absolute;
+		margin: 1em;
+		font-size: 1.5em;
+	}
+}
+
+
+/* ----------- formulaire ----------- */
+
+fieldset label {
+	clear : left;
+}
+
+fieldset span, fieldset input{
+	display: inline;
+	margin-right : 10px;
+	float : left;	
+}
+ 
+ fieldset {
+ 	border : 0px !important;
+ }

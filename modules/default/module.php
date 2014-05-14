@@ -1,6 +1,6 @@
 <!-- ICI JE NE MET QUE DU PHP!!! -->
 <?php
-Header::set_title("Module  : par défaut");
+Header::set_title("Clinique vétérinaire");
 
 include(INCLUDES."Session.class.php");
 

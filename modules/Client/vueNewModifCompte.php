@@ -3,10 +3,10 @@
 		
 		<?php if (!isset($Cli)) {
 		?>
-			<legend>Inscription nouveau utilisateur</legend>
+			<h1>Inscription nouveau utilisateur</h1>
 		<?php } else {
 		?>
-			<legend>Modification compte</legend>
+			<h1>Modification compte</h1>
 		<?php
 		}	
 		?>
