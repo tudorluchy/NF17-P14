@@ -1,5 +1,26 @@
 <?php
  
+CONST TEXTE = '/^[a-zA-Z0-9]+([\-\_\!\?\/][a-zA-Z0-9])*/';
+CONST MAXTEXT = 50;
+CONST MINTEXT = 2;  
+
+CONST TEL = '#^0[1-68][0-9]{8}$#';
+CONST TAILLETEL = 10;
+
+
+CONST MAXTEXTAREA = 20000;
+CONST MINTEXTAREA = 2;  
+
+CONST DATES = "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#";	
+
+CONST MAIL = '#^([a-zA-Z0-9]+(([\.\-\_]?[a-zA-Z0-9]+)+)?)\@(([a-zA-Z0-9]+[\.\-\_])+[a-zA-Z])#';
+CONST MAXMAIL = 30;
+CONST MINMAIL = 6; 
+
+CONST MINPWD = 6;
+CONST MAXPWD = 30;
+CONST PWD = "/^[a-zA-Z0-9]{6,25}$/"; 
+ 
 define("ALERTE",1);
 define("ERREUR",2);
 define("OK",4);
@@ -128,7 +149,7 @@ class Site {
 		* $message : message affiché
 		* $type : type du message (défaut INFO)
 		*/
-		static function message($message, $type=INFO)
+		/*static function message($message, $type=INFO)
 		{ 
 			switch($type)
 			{
@@ -157,7 +178,184 @@ class Site {
 				</div>
 		 
 ENDOFMESSAGE;
+		}*/
+		
+		static function message($message, $type='INFO') {
+			switch($type) {
+				case INFO : { $div = "#message_info"; $img = 'information'; break;}
+				case ERREUR : { $div = "#message_erreur"; $img = 'erreur'; break;}
+				case ALERTE : { $div = "#message_warning"; $img = 'warning'; break;}
+			}			
+			
+			echo(
+					"<script type=\"text/javascript\">
+						
+					if($(\"$div\").html() != \"\")
+						$(\"$div\").append(\"$message\").delay(4000).fadeOut();
+					else
+						$(\"$div\").show().append(\"<img src='template/$img.png'/><h3>$message</h3><div style='clear: both'></div>\").delay(8000).fadeOut();
+					</script>"
+			);
 		}
 		
+		static function verif_Text($champs, $text) {
+		$error = "";
+		
+		if($text == '') 
+			if ($champs == '')
+				$error = "Veuillez remplir ce champ svp";
+			else	
+				$error = "Veuillez remplir le champ '".$champs."' svp";
+				
+		else {
+			if ((MAXTEXT < strlen($text)) || (MINTEXT > strlen($text)))
+				if ($champs == '')
+					$error = "La taille de ce champ doit être comprise entre ".MINTEXT." et ".MAXTEXT." caractères";
+				else
+					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINTEXT." et ".MAXTEXT." caractères";
+
+			else if(! preg_match(TEXTE, $text))
+				if ($champs == '')
+					$error = "Veuillez remplir correctement ce champ svp";
+				else
+					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
+		}
+			return ($error);
+	}
+	
+	static function verif_Telephone($champs, $tel) {
+	
+		$error = "";
+		
+		if($tel == '') 
+			if ($champs == '')
+				$error = "Veuillez remplir ce champ svp";
+			else	
+				$error = "Veuillez remplir le champ '".$champs."' svp";
+				
+		else {
+			if (TAILLETEL != strlen($tel))
+				if ($champs == '')
+					$error = "La taille de ce champ doit être de ".TAILLETEL." caractères";
+				else
+					$error = "La taille de votre champ '".$champs."' doit être de ".TAILLETEL." caractères";
+
+			else if(! preg_match(TEL, $tel))
+				if ($champs == '')
+					$error = "Veuillez remplir correctement ce champ svp";
+				else
+					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
+		}
+			return ($error);
+	}
+	
+	static function verif_Textarea($champs, $textarea) {
+		$error = "";
+	
+		if($textarea == '') 
+			if ($champs == '')
+				$error = "Veuillez remplir ce champ svp";
+			else
+				$error = "Veuillez remplir le champ '".$champs."' svp";
+
+		else if ((MAXTEXTAREA < strlen($textarea)) || (MINTEXTAREA > strlen($textarea))) 
+				if ($champs == '')
+					$error = "La taille de ce champ doit être comprise entre ".MINTEXTAREA." et ".MAXTEXTAREA." caractères";
+				else
+					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINTEXTAREA." et ".MAXTEXTAREA." caractères";
+		return ($error);
+	}
+	
+	
+	static function verif_mail($champs, $mail) {
+		$error = "";
+	
+		if($mail == '')	
+			if ($champs == '')
+				$error = "Veuillez remplir ce champ svp";
+			else
+				$error = "Veuillez remplir le champ '".$champs."' svp";
+		else {
+
+			if(! preg_match(MAIL, $mail))
+				if ($champs == '')
+					$error = "Veuillez remplir correctement ce champ svp";
+				else
+					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
+
+			if ((MAXMAIL < strlen($mail)) || (MINMAIL > strlen($mail)))
+				if ($champs == '')
+					$error = "La taille de ce champ doit être comprise entre ".MINMAIL." et ".MAXMAIL." caractères";
+				else
+					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINMAIL." et ".MAXMAIL." caractères";
+		}
+		return ($error);
+	
+	}
+	
+	static function verif_date($champs, $date) {
+		$error = "";
+		
+		if($date == '')	
+			if ($champs == '')
+				$error = "Veuillez remplir ce champ svp";
+			else
+				$error = "Veuillez remplir le champ '".$champs."' svp";
+		else { 
+			if(! preg_match(DATES, $date))
+				if ($champs == '')
+					$error = "Veuillez remplir correctement ce champ svp";
+				else
+					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
+		}
+	
+		return ($error);
+	}
+	
+	static function verif_pass1($champs, $pass) {
+		$error = "";
+		
+		if($pass  == '') {
+			if ($champs == '')
+				$error = "Veuillez remplir ce champ svp";
+			else
+				$error = "Veuillez remplir le champ '".$champs."' svp";
+			}
+		else{	
+			if(! preg_match(PWD, $pass))
+				if ($champs == '')
+					$error = "Veuillez remplir correctement ce champ svp";
+				else
+					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
+					
+			if ((MAXPWD < strlen($pass)) || (MINPWD > strlen($pass)))
+				if ($champs == '')
+					$error = "La taille de ce champ doit être comprise entre ".MINPWD." et ".MAXPWD." caractères";
+				else
+					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINPWD." et ".MAXPWD." caractères";
+			 }
+		return ($error);
+	}
+	
+	static function verif_pass2($pass1, $pass2) {
+		$error = "";
+			if($pass1 != $pass2) {			
+				$error[] = "Les deux mot de passe ne correspondent pas";
+			}	
+		return($error);
+	}
+	
+	static function affiche_erreur($tab){
+		$error = false;
+		
+		foreach ($tab as $t) {
+			if ($t != "") {
+				site::message_info($t);
+				$error = true;
+			}		
+		}
+		return ($error);
+	}
+			
 }
 ?>

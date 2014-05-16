@@ -28,7 +28,7 @@
 		<link rel="stylesheet" type="text/css" href="css/menu/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/menu/component.css" />
 		<script src="js/menu/modernizr.custom.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/slider/jquery.bxslider.min.js"></script>
 		<link href="css/slider/jquery.bxslider.css" rel="stylesheet" />
 		<script type="text/javascript">
@@ -89,6 +89,9 @@
 					</ul>
 				</li>
 			</ul>
+			<div id="message_erreur"></div>
+			<div id="message_warning"></div>
+			<div id="message_info"></div>
 			
 			<ul class="bxslider">
 			    <li><img src="template/slide1.jpg" /></li>
