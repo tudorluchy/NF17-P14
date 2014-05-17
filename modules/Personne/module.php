@@ -9,25 +9,22 @@ switch ( Form::get('action') ){
 	case 'valide':
 		validation();
 		break;
-	case 'newCompte':
-		newCompte();
-		break;
-	case 'modifCompte':
-		modifCompte();
+	case 'modif':
+		if (session::ouverte()) { modif(); } else { site::redirect("?"); }
 		break;
 	default:
-		inscription();
+		if (session::ouverte()) { moncompte(); } else { inscription(); }
 		break;
 }
 
-function newCompte() {
-	include('vueNewModifCompte.php');
-}	
+function modif() {
+	$pers = new Personne ($_SESSION['user']->telephone, $_SESSION['user']->nom, $_SESSION['user']->prenom);
+	include('inscription.php');
+}
 
-function modifCompte() {
-
+function moncompte() {
 	$Cli = Client::ChercherParLogin($_SESSION['user']->login);	
-	include('vueNewModifCompte.php');
+	include('moncompte.php');
 }
 
 function validation() {
@@ -41,13 +38,21 @@ function validation() {
 	
 	
 	if (!site::affiche_erreur($error)) {
-		//$pers.enregistrer();          // A FAIRE QUAND LA BASE FONCTIONNERA
-		
+		        
+		if (!isset($_SESSION['user'])) {
+			$pers->Inserer();
+			$_SESSION["messages"] = 'Votre compte a correctement été créé';
+			}
+		else {
+			$pers->Modifier($_SESSION['user']->telephone);
+			session::fermer();
+			$_SESSION["messages"] = 'Votre compte a correctement été modifié';
+			}
+		session::ouvrir($pers);
+		site::redirect("?module=personne&action=moncompte");			
 	}
 	else 
 		include('inscription.php');
-	
-
 }
 
 function inscription(){

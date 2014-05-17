@@ -8,7 +8,7 @@
 	require("toolbox/frontcontroller.php");
 
 	require_once("includes/Params.ini.php");
-	require_once("includes/Autoload.php");
+	require_once("includes/Autoload.php");;
 
 	Header::set_title("Titre site");
 	Header::set_favicon("template/favicon.png");
@@ -99,63 +99,70 @@
  			    <li><img src="template/slide3.jpg" /></li>
  			    <li><img src="template/slide4.jpg" /></li>
 			</ul>
-			
+			<div id='corps'>
 				<div id="colonne_gauche">
 					
 					<div id="bloc">
 						<h3>Menu Utilisateur</h3>
 						<hr>
 						<ul>
-							<form action="?module=Login" autocomplete="on">
-								<li><label>Pseudo</label><input type="text" name="pseudo" /><span></span></li>
-								<li><label>Mot de passe </label><input type="password" name="password" /><span></span></li>
-								<li><input  type="submit" name="connexion" value="connexion"/></li>	
-							</form>
-							<li><a href="?module=Client&action=newCompte">Créer un nouveau compte</a></li>
-							<li><a href="?module=Client&action=newCompte">Demander un nouveau mot de passe</a></li>
+							
+							<?php
+								if (!isset($_SESSION['user']->telephone)) {
+									include_once ("./modules/Login/login.php");?>
+									
+									<li><a href="?module=personne">Créer un nouveau compte</a></li>
+									
+							<?php	}
+								else { ?>
+									<li><a href="?module=personne&action=moncompte">Mon Compte</a></li>
+									<li><a href="?module=Login&action=deco">Se déconnecter</a></li>
+									
+							<?php	}?>
+								
+							
 						</ul>
 					</div>
 					
 					
-					<div id="bloc">
-						<h3>Utilisateurs en ligne</h3>
-						<hr>
-						<p><?php
-						if (empty($_SESSION['user']))
-								echo('Il y a actuellement 0 utilisateur connecté.');
-						else {
-							echo('Les utilisateurs connectés sont : ');
-							echo ('<ul>');
-							foreach ($_SESSION['user'] as $usr)
-								echo ("<li> $usr </li>");
-							echo ('</ul>');
-						} ?>
-						</p>
+						<div id="bloc">
+							<h3>Utilisateurs en ligne</h3>
+							<hr>
+							<p><?php
+							if (empty($_SESSION['user']->telephone))
+									echo('Il y a actuellement 0 utilisateur connecté.');
+							else {
+								echo('Les utilisateurs connectés sont : ');
+								echo ('<ul>');
+								echo ("<li>". $_SESSION['user']->nom ."</li>");
+								echo ('</ul>');
+							} ?>
+							</p>
+						</div>
+						
+						<div style='clear: both'></div>
 					</div>
-					
-					<div style='clear: both'></div>
-				</div>
-		 
-				<?php
-					// Vous Ãªtes dÃ©connectÃ© / connectÃ©
-					if (Site::messages())
-						Site::liste_message();
-				?>
-				<div id='contenu'>
+			 
 					<?php
-						Controller::get_content();
-					?>	
+						// Vous Ãªtes dÃ©connectÃ© / connectÃ©
+						if (Site::messages())
+							Site::liste_message();
+					?>
+					<div id='contenu'>
+						<?php
+							Controller::get_content();
+						?>	
+					</div>
+					<?php
+						// Vous Ãªtes dÃ©connectÃ© / connectÃ©
+						if(Site::messages())
+							
+							Site::liste_message();
+						
+					?>
 				</div>
-				<?php
-				
-					// Vous Ãªtes dÃ©connectÃ© / connectÃ©
-					if(Site::messages())
-						Site::liste_message();
-					
-				?>
-			</div>
 
-		
+			</div>
 		
 		
 		<div id='footer'>

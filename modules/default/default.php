@@ -1,7 +1,7 @@
 <!-- ICI J'UTILISE LE HTML!!! LE PHP N'EST UTILISÉ QUE POUR LES BOUCLES
 L'INITIALISATION DE MES VARIABLES PHP SE FONT DANS LE MODULE! -->
 
-<h1>Bienvenue</h1>
+<h1>Bienvenue <?php if (isset($_SESSION['user']->nom)) echo($_SESSION['user']->nom); ?></h1>
 
 
 <p>

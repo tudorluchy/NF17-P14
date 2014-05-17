@@ -1,43 +1,45 @@
 <?php
 
-Class Personne {
+Class Animal {
 	
 	//Attributs
-	public $telephone;
+	public $num_dossier;
 	public $nom;
-	public $prenom;
+	public $poids;
+	public $taille;
+	public $genre;
+	public $date_naiss;
+	public $photo;
+	public $race;
+	public $espece;
+	public $telephone;
 	
-	function __construct ($telephone, $nom, $prenom){
-		$this->telephone=$telephone;
-		$this->nom=$nom;
-		$this->prenom=$prenom;
+	function __construct ($num_dossier, $nom, $poids, $taille, $genre, $date_naiss, $photo, $race, $espece, $telephone){
+		$this->num_dossier = $num_dossier;
+		$this->nom = $nom;
+		$this->poids = $poids;
+		$this->taille = $taille;
+		$this->genre = $genre;
+		$this->date_naiss = $date_naiss;
+		$this->photo = $photo;
+		$this->race = $race;
+		$this->espece = $espece;
+		$this->telephone = $telephone;
 	}
-	// Méthodes de classe privées
-	function Inserer(){
+	
+	public static function mesanimaux($telephone) {
 		$vConn = site::fconnect();
-		$vSql = "INSERT INTO tpersonne VALUES ('{$this->telephone}','{$this->nom}','{$this->prenom}')";
+		$vSql = "SELECT * FROM tanimal WHERE telephone='611111111'";
 		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
+		
+		while($vResult = pg_fetch_array($vQuery)){
+			$res[] = new Animal($vResult['num_dossier'], $vResult['nom'], $vResult['poids'], $vResult['taille'], $vResult['genre'], $vResult['date_naiss'], $vResult['photo'], $vResult['race'], $vResult['espece'], $vResult['telephone']);
+		} 
+		return $res;
 	}
 
 	
-	public static function Connection($telephone) {
-		$vConn = site::fconnect();
-		$vSql = "SELECT * FROM tpersonne WHERE telephone='$telephone'";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
-		
-		return new Personne($vResult['telephone'], $vResult['nom'], $vResult['prenom']);
-	}
-	
-	
-	function Modifier($telephone){	
-		$vConn = site::fconnect();
-		$vSql = "UPDATE tpersonne SET telephone='{$this->telephone}',nom='{$this->nom}',prenom='{$this->prenom}' WHERE telephone='$telephone';";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);	
-	}		
-	/*
+	/* 
 	public function Supprimer(){
 		$sql="DELETE FROM ... WHERE id='{$this->id}'";
 		$res=DB::Sql($sql);

@@ -32,9 +32,14 @@ class Session
  
 	}
 	
-	static function info()
+	static function nom()
 	{
-		print (self::$user->login);
+		print (self::$user->nom);
+	}
+	
+	static function telephone()
+	{
+		print (self::$user->telephone);
 	}
 }
 ?>

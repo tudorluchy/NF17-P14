@@ -89,13 +89,13 @@ class Site {
 		*/
 		static function liste_message()
 		{
-
+			
 			if(empty($_SESSION["messages"]))
 				return;
-			
-				
+
 			foreach($_SESSION["messages"] as $message=>$type)
 			{
+
 				self::message($message,$type);
 			}
 			self::effacer_message_info();
@@ -198,6 +198,47 @@ ENDOFMESSAGE;
 			);
 		}
 		
+		 static function fconnect () {
+  
+			  $vHost="tuxa.sme.utc";
+			  $vDbname="dbnf17p026";
+			  $vPort="5432";
+			  $vUser="nf17p026";
+			  $vPassword="5OzDifpQ";
+			  $vConn = pg_connect("host=$vHost port=$vPort dbname=$vDbname user=$vUser password=$vPassword");	
+
+			  return $vConn;
+		}
+		
+		static function upload($dossier, $tab){
+			$error = false;
+
+			if($tab['photo']['name'] == "")
+				$fichier = "icone_defaut";
+			else {	
+				$extensions = array(".png",".jpg",".jpeg",".bmp",".PNG",".JPG",".JPEG",".BMP");
+				$fichier=uniqid();
+				$extension = strrchr($tab['photo']['name'], '.');
+				
+				if(!in_array($extension, $extensions)){
+					self::message("Mauvaise extension de fichier");
+					$error = true;
+				}
+				
+				if(!move_uploaded_file($tab['photo']['tmp_name'], $dossier.$fichier.".png")) {
+					self::message("L'upload a échoué");
+					$error = true;
+					}
+				}	
+				if($error == true)
+					return ("");
+						
+				else	{
+					$fichier .=".png";	
+					return ($fichier);
+				}
+		}
+		
 		static function verif_Text($champs, $text) {
 		$error = "";
 		
@@ -224,7 +265,6 @@ ENDOFMESSAGE;
 	}
 	
 	static function verif_Telephone($champs, $tel) {
-	
 		$error = "";
 		
 		if($tel == '') 

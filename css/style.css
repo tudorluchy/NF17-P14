@@ -1,36 +1,37 @@
-/* ----------- Messages ----------- */
-#message_erreur, #message_warning, #message_info {
-	padding: 20px;
-	margin-top: 5px;
+/* Mon compte */
+#moncompte h2 {
+	margin-top : 2em;
 }
 
-#message_erreur img, #message_warning img, #message_info img {
-	float : left;
+
+/* Facture */
+#detail_facture li {
+	list-style-type:none;
+	padding : 0.5em;
+
 }
 
-#message_erreur h3, #message_warning h3, #message_info h3 {
-	float : left;
-	margin : 1em 1em;
+
+
+
+#corps {
+	padding-top: 2em;
+	background : white;
+
 }
 
-#message_erreur {
-	background: #e87979;
-	border: 3px groove #b32222;
+
+#modifier img, #supprimer img{
+	width : 30px;
 }
 
-#message_info
-{
-	background: lightgreen;
-	border: 3px groove green;
+#ajouter img {
+
+	width : 40px;
 }
-
-#message_warning {
-	background: orange;
-	border: 3px groove darkorange;
+#photo {
+	width : 120px;
 }
-
-#message_info:empty, #message_warning:empty , #message_erreur:empty { display: none }
-
 
 #page {
 	max-width: 1000px;
@@ -78,7 +79,12 @@ background-image:   radial-gradient(50% 50%, ellipse closest-side, white, lightb
 }
 
 #contenu h1 {
+	background : #47a3da;
+	border-radius : 0.5em;
+	padding : 0.3em;
+	color : white;
 	margin-bottom : 0.8em;
+	margin-left : 210px;
 }
 
 #contenu option,#contenu input,#contenu select,#contenu textarea,#file {
@@ -101,6 +107,25 @@ span {
 }
 
 
+table {
+	border: 3px groove #47a3da;
+	
+}
+tr {
+	border: 3px groove #47a3da;
+	padding : 0.5em;
+}
+th{
+	background : #47a3da;
+	padding : 0.5em;
+	font-weight: bold;
+	color : white;
+}
+td {
+	padding : 0.5em;
+}
+
+
 #formulaire {
 	margin-left: 28%;
 	margin-right: auto;
@@ -113,7 +138,6 @@ p {
 }
 
 h2 {
-	text-align: center;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 }
@@ -156,8 +180,8 @@ div#colonne_gauche,div#colonne_droite,div#contenu {
 
 #message_info
 {
-	background: lightgreen;
-	border: 3px groove green;
+	background: white;
+	border: 3px groove #47a3da;
 }
 
 #message_warning {
@@ -190,6 +214,14 @@ div#colonne_gauche {
 	float: left;
 	word-wrap: break-word;
 	margin-right : 15px;
+}
+
+div#colonne_gauche .bloc_inscrip {
+	margin : 1em 3.5em!important;
+}
+
+div#colonne_gauche form{
+	padding-left : 1em
 }
 
 div#colonne_gauche #bloc {

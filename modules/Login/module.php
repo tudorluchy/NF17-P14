@@ -1,45 +1,58 @@
+<!-- ICI JE NE MET QUE DU PHP!!! -->
 <?php
+Header::set_title("Connexion");
 
-switch(Form::get('action')) {
-	// connection Client
-	case 'Login':  
-		login_client();
+include(CLASSES."Personne.class.php");
+include(INCLUDES."Session.class.php");
+
+switch ( Form::get('action') ){	
+	case 'veriflogin':
+		veriflogin();
 		break;
-	case 'Deconnect' : 
-		Session::fermer(); 
-		Site::message_info("Vous êtes déconnecté");
-		Site::redirect("index.php");
+		
+	case 'deco':
+		deco();
 		break;
+			
 	default:
-		// si déjà connecté
-		if (Session::ouverte()) {
-			echo "<p><a href='?module=login&action=Deconnect'>Déconnexion</a></p>";
-		} else {
-print <<<ENDFORM
-		<form action='?module=Login&action=Login' method='post' class='login'>
-			<input type='text' name='Login' title='Login de connexion'>
-			<input type='password' name='Pass' title='Mot de passe'>
-			<input type='submit' value='Connexion'>
-		</form>
-ENDFORM;
-		}
+		login();
+		break;
 }
 
-function login_client()
-{
-	if (Site::messages())
-		Site::liste_message();
-		
-	$user = Client::Connection(Form::get('Login'),Form::get('Pass'));
+
+
+function veriflogin() {
 	
-	if (!$user) {
-		Site::message_info("Mot de passe ou login invalide");
-		Site::redirect("index.php");
-	} else {
-		Session::ouvrir($user);
-		Site::message_info("Vous êtes connecté");
-		Site::redirect("index.php");
+	$error[] = site::verif_Telephone('telephone', $_POST['telephone']);
+	
+	if (!site::affiche_erreur($error)) {
+		$pers = Personne::Connection($_POST['telephone']);	
+		
+		session::ouvrir($pers);
+		$_SESSION["messages"] = 'Vous êtes désormais connecté sous le nom de ' . $pers->nom;
+	}
+	else 
+		login();
+}
+
+function deco() {
+	if (session::ouverte())
+	session::fermer();
+	$_SESSION["messages"] = 'Vous avez correctement été déconnecté';
+	site::redirect("?");
+}
+
+function login(){
+	if (!session::ouverte())
+		include('login.php');
+	else {
+		$_SESSION["messages"] = 'Vous êtes déjà connecté';
+		site::redirect("?");
 	}
 }
-	
-?>
+
+
+
+
+
+
