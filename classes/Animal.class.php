@@ -29,7 +29,7 @@ Class Animal {
 	
 	public static function mesanimaux($telephone) {
 		$vConn = site::fconnect();
-		$vSql = "SELECT * FROM tanimal WHERE telephone='611111111'";
+		$vSql = "SELECT * FROM tanimal WHERE telephone='$telephone'";
 		$vQuery=pg_query($vConn, $vSql);
 		
 		while($vResult = pg_fetch_array($vQuery)){

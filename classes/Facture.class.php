@@ -31,7 +31,7 @@ Class Facture {
 	
 	public static function mesfactures($telephone){
 		$vConn = site::fconnect();
-		$vSql = "SELECT * FROM tfacture WHERE telephone_pers='611111111'";
+		$vSql = "SELECT * FROM tfacture WHERE telephone_pers='$telephone'";
 		$vQuery=pg_query($vConn, $vSql);
 		
 		while($vResult = pg_fetch_array($vQuery)){
@@ -42,7 +42,7 @@ Class Facture {
 	
 	public static function detailfacture($reference){
 		$vConn = site::fconnect();
-		$vSql = "SELECT * FROM tfacture WHERE reference='1'";
+		$vSql = "SELECT * FROM tfacture WHERE reference='$reference'";
 		$vQuery=pg_query($vConn, $vSql);
 		$vResult = pg_fetch_array($vQuery);
 		return new Facture($vResult['reference'], $vResult['montant'], $vResult['etat'], $vResult['mode_reglement'], $vResult['date_reglement'], $vResult['date_edition'], $vResult['telephone_emp'], $vResult['num_dossier'], $vResult['telephone_pers'], $vResult['race'], $vResult['espece']);
