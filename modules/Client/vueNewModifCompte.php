@@ -28,12 +28,10 @@
 			<label for="age">Age :</label>
 			<input name="age" type="text" id="age" value="<?php if (isset($Cli)) echo $Cli->age;?>">
 			
-		<p>
 			<div class="bloc_inscrip">
-			<input  type="reset" name="reset" value="Reset"/>
-			<input  type="submit" name="valider" value="Valider"/>	
+				<input  type="reset" name="reset" value="Reset"/>
+				<input  type="submit" name="valider" value="Valider"/>	
 			</div>
-		</p>
 		
 	</fieldset>			
 </form>	 

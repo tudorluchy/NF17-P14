@@ -1,25 +1,25 @@
 <?php
  
-CONST TEXTE = '/^[a-zA-Z0-9]+([\-\_\!\?\/][a-zA-Z0-9])*/';
-CONST MAXTEXT = 50;
-CONST MINTEXT = 2;  
+define("TEXTE", '/^[a-zA-Z0-9]+([\-\_\!\?\/][a-zA-Z0-9])*/');
+define("MAXTEXT", 50);
+define("MINTEXT", 2);  
 
-CONST TEL = '#^0[1-68][0-9]{8}$#';
-CONST TAILLETEL = 10;
+define("TEL", '#^0[1-68][0-9]{8}$#');
+define("TAILLETEL", 10);
 
 
-CONST MAXTEXTAREA = 20000;
-CONST MINTEXTAREA = 2;  
+define("MAXTEXTAREA", 20000);
+define("MINTEXTAREA", 2);  
 
-CONST DATES = "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#";	
+define("DATES", "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#");	
 
-CONST MAIL = '#^([a-zA-Z0-9]+(([\.\-\_]?[a-zA-Z0-9]+)+)?)\@(([a-zA-Z0-9]+[\.\-\_])+[a-zA-Z])#';
-CONST MAXMAIL = 30;
-CONST MINMAIL = 6; 
+define("MAIL", '#^([a-zA-Z0-9]+(([\.\-\_]?[a-zA-Z0-9]+)+)?)\@(([a-zA-Z0-9]+[\.\-\_])+[a-zA-Z])#');
+define("MAXMAIL", 30);
+define("MINMAIL", 6); 
 
-CONST MINPWD = 6;
-CONST MAXPWD = 30;
-CONST PWD = "/^[a-zA-Z0-9]{6,25}$/"; 
+define("MINPWD", 6);
+define("MAXPWD", 30);
+define("PWD", "/^[a-zA-Z0-9]{6,25}$/"); 
  
 define("ALERTE",1);
 define("ERREUR",2);
