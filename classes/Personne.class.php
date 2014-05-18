@@ -20,6 +20,27 @@ Class Personne {
 		$vResult = pg_fetch_array($vQuery);
 	}
 
+	function InsererVeterinaire(){
+		$vConn = site::fconnect();
+		$vSql = "INSERT INTO tpersonne VALUES ('{$this->telephone}','{$this->nom}','{$this->prenom}')";
+		$vQuery=pg_query($vConn, $vSql);
+		$vResult = pg_fetch_array($vQuery);
+		
+		$vSql = "INSERT INTO tveterinaire VALUES ('{$this->telephone}')";
+		$vQuery=pg_query($vConn, $vSql);
+		$vResult = pg_fetch_array($vQuery);
+	}
+	
+	function InsererEmployee(){
+		$vConn = site::fconnect();
+		$vSql = "INSERT INTO tpersonne VALUES ('{$this->telephone}','{$this->nom}','{$this->prenom}')";
+		$vQuery=pg_query($vConn, $vSql);
+		$vResult = pg_fetch_array($vQuery);
+		
+		$vSql = "INSERT INTO temployee VALUES ('{$this->telephone}')";
+		$vQuery=pg_query($vConn, $vSql);
+		$vResult = pg_fetch_array($vQuery);
+	}
 	
 	public static function Connection($telephone) {
 		$vConn = site::fconnect();
@@ -62,12 +83,14 @@ Class Personne {
 		}
 	}
 	
-	public static function Existe($login) {
-		$sql = "select count(*) as nb from tclient where login='$login'";
+	*/
+	
+	public static function Existe($telephone) {
+		$sql = "select count(*) as nb from tpersonne where telephone='$telephone'";
 		$res = DB::Sql($sql);
 		$res2 = pg_fetch_assoc($res);
 
-		// si login trouvér.
+		// si telephone trouvé
 		if ($res2['nb'] != 0) {
 			return true;
 		} else {
@@ -75,7 +98,7 @@ Class Personne {
 		}
 	}
 
-	*/
+	
 };
 
 ?>
