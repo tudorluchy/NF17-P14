@@ -4,6 +4,7 @@ Header::set_title("Personne");
 
 include(CLASSES."Personne.class.php");
 include(INCLUDES."Session.class.php");
+include(INCLUDES."Site.class.php");
 
 switch ( Form::get('action') ){	
 	case 'valide':
@@ -44,12 +45,12 @@ function validation() {
 		        
 		if (!isset($_SESSION['user'])) {
 			$pers->Inserer();
-			$_SESSION["messages"] = 'Votre compte a correctement été créé';
+			site::message_info('Votre compte a correctement été créé');
 			}
 		else {
 			$pers->Modifier($_SESSION['user']->telephone);
 			session::fermer();
-			$_SESSION["messages"] = 'Votre compte a correctement été modifié';
+			site::message_info('Votre compte a correctement été modifié');
 			}
 		session::ouvrir($pers);
 		site::redirect("?module=personne&action=moncompte");			
@@ -78,10 +79,10 @@ function validation_admin() {
 	if (!site::affiche_erreur($error)) {
 		if ($_POST['type'] == 'veterinaire') {
 			$pers->InsererVeterinaire();
-			$_SESSION["messages"] = 'Le compte veterinaire a correctement été créé';
+			site::message_info('Le compte veterinaire a correctement été créé');
 		} else if ($_POST['type'] == 'employee') {
 			$pers->InsererEmployee();
-			$_SESSION["messages"] = 'Le compte employée a correctement été créé';
+			site::message_info('Le compte employée a correctement été créé');
 		} else {
 			site::affiche_erreur('Les deux seuls types de comptes possibles à créer sont Veterinaire et Employée.');
 		}
@@ -98,7 +99,3 @@ function inscription(){
 function administration(){
 	include('administration.php');
 }
-
-
-
-

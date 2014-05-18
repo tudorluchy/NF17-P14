@@ -20,8 +20,6 @@ switch ( Form::get('action') ){
 		break;
 }
 
-
-
 function veriflogin() {
 	
 	$error[] = site::verif_Telephone('telephone', $_POST['telephone']);
@@ -30,7 +28,7 @@ function veriflogin() {
 		$pers = Personne::Connection($_POST['telephone']);	
 		
 		session::ouvrir($pers);
-		$_SESSION["messages"] = 'Vous êtes désormais connecté sous le nom de ' . $pers->nom;
+		site::message_info('Vous êtes désormais connecté sous le nom de ' . $pers->nom);
 	}
 	else 
 		login();
@@ -39,7 +37,7 @@ function veriflogin() {
 function deco() {
 	if (session::ouverte())
 	session::fermer();
-	$_SESSION["messages"] = 'Vous avez correctement été déconnecté';
+	site::message_info('Vous avez correctement été déconnecté');
 	site::redirect("?");
 }
 
@@ -47,7 +45,7 @@ function login(){
 	if (!session::ouverte())
 		include('login.php');
 	else {
-		$_SESSION["messages"] = 'Vous êtes déjà connecté';
+		site::message_info('Vous êtes déjà connecté');
 		site::redirect("?");
 	}
 }
