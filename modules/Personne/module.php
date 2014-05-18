@@ -59,7 +59,9 @@ function inscription(){
 	include('inscription.php');
 }
 
-
+function administration(){
+	include('administration.php');
+}
 
 
 

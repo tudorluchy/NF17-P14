@@ -42,12 +42,6 @@
 			<div id='header'>
 				<h1>Clinique vétérinaire</h1>
 				<img src="./template/header.jpg">
-			
-				<?php 
-					// le client non-admin ne voit pas le menu admistrateur
-					if (!isset($_SESSION['user']) || (isset($_SESSION['user']) && $_SESSION['user']->type != 'client')) {
-					}
-				?>
 			</div>
 				<ul id="cbp-tm-menu" class="cbp-tm-menu">
 				<li>
@@ -116,6 +110,13 @@
 							<?php	}
 								else { ?>
 									<li><a href="?module=personne&action=moncompte">Mon Compte</a></li>
+									<?php
+									if (isset($_SESSION['user']->telephone) && $_SESSION['user']->telephone == '0699999999') {
+									?>
+										<li><a href="?module=personne&action=administration">Administration</a></li>
+									<?php
+									}
+									?>
 									<li><a href="?module=Login&action=deco">Se déconnecter</a></li>
 									
 							<?php	}?>

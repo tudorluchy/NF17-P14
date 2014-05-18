@@ -4,6 +4,7 @@ Header::set_title("Connexion");
 
 include(CLASSES."Personne.class.php");
 include(INCLUDES."Session.class.php");
+include(INCLUDES."Site.class.php");
 
 switch ( Form::get('action') ){	
 	case 'veriflogin':
@@ -50,9 +51,3 @@ function login(){
 		site::redirect("?");
 	}
 }
-
-
-
-
-
-

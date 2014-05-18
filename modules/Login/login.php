@@ -2,7 +2,6 @@
 	<fieldset>
 
 				<label>Telephone</label><input type="text" name="telephone" />
-				<label>Mot de passe </label><input type="password" name="password" />
 				
 
 			<div class="bloc_inscrip">
