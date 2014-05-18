@@ -34,12 +34,21 @@ class Session
 	
 	static function nom()
 	{
-		print (self::$user->nom);
+		return ($_SESSION['user']->nom);
 	}
 	
-	static function telephone()
+	static function isConnected()
 	{
-		print (self::$user->telephone);
+		return isset($_SESSION['user']->telephone);
+	}
+	
+	static function isAdmin()
+	{
+		if ($_SESSION['user']->telephone == '0699999999') {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 ?>

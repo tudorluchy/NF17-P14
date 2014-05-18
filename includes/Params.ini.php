@@ -3,10 +3,10 @@
 // local
 if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
 	// données pour la connexion à la base de données local
-    define("DB_HOST","localhost");
-	define("DB_USER","user");
-	define("DB_PASS","pass");
-	define("BASE","base");
+    define("DB_HOST","tuxa.sme.utc");
+	define("DB_USER","nf17p026");
+	define("DB_PASS","5OzDifpQ");
+	define("BASE","dbnf17p026");
 
     // affiche toutes les erreurs et warnings PHP en local
     error_reporting(E_ALL);

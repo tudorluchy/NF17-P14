@@ -198,6 +198,7 @@ ENDOFMESSAGE;
 			);
 		}
 		
+		/*
 		 static function fconnect () {
   
 			  $vHost="tuxa.sme.utc";
@@ -209,6 +210,7 @@ ENDOFMESSAGE;
 
 			  return $vConn;
 		}
+		*/
 		
 		static function upload($dossier, $tab){
 			$error = false;

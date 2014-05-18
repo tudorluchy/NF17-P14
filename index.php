@@ -102,22 +102,22 @@
 						<ul>
 							
 							<?php
-								if (!isset($_SESSION['user']->telephone)) {
-									include_once ("./modules/Login/login.php");?>
+								if (!Session::isConnected()) {
+									include_once ("./modules/Personne/connexion.php");?>
 									
-									<li><a href="?module=personne">Créer un nouveau compte</a></li>
+									<li><a href="?module=Personne">Créer un nouveau compte</a></li>
 									
 							<?php	}
 								else { ?>
-									<li><a href="?module=personne&action=moncompte">Mon Compte</a></li>
+									<li><a href="?module=Personne&action=moncompte">Mon Compte</a></li>
 									<?php
-									if (isset($_SESSION['user']->telephone) && $_SESSION['user']->telephone == '0699999999') {
+									if (Session::isConnected() && Session::isAdmin()) {
 									?>
-										<li><a href="?module=personne&action=administration">Administration</a></li>
+										<li><a href="?module=Personne&action=administration">Administration</a></li>
 									<?php
 									}
 									?>
-									<li><a href="?module=Login&action=deco">Se déconnecter</a></li>
+									<li><a href="?module=Personne&action=deco">Se déconnecter</a></li>
 									
 							<?php	}?>
 								

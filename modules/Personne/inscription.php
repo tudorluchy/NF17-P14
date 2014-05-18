@@ -8,7 +8,7 @@
 
 
 
-<form  enctype="multipart/form-data" name="inscription" action="?module=personne&action=valide" method="POST">
+<form  enctype="multipart/form-data" name="inscription" action="?module=Personne&action=valide" method="POST">
 	<fieldset>
 		
 

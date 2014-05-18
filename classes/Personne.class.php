@@ -1,5 +1,9 @@
 <?php
 
+define("PERSONNE",1);
+define("VETERINAIRE",2);
+define("EMPLOYE",3);
+
 Class Personne {
 	
 	//Attributs
@@ -13,50 +17,32 @@ Class Personne {
 		$this->prenom=$prenom;
 	}
 	// Méthodes de classe privées
-	function Inserer(){
-		$vConn = site::fconnect();
-		$vSql = "INSERT INTO tpersonne VALUES ('{$this->telephone}','{$this->nom}','{$this->prenom}')";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
+	function Inserer($type=PERSONNE){
+		$sql = "INSERT INTO tpersonne VALUES ('{$this->telephone}','{$this->nom}','{$this->prenom}')";
+		$res=DB::Sql($sql);
+		
+		if ($type == VETERINAIRE) {
+			$sql = "INSERT INTO tveterinaire VALUES ('{$this->telephone}')";
+			$res=DB::Sql($sql);
+		} else if ($type == EMPLOYE) {
+			$sql = "INSERT INTO temployee VALUES ('{$this->telephone}')";
+			$res=DB::Sql($sql);
+		}
 	}
 
-	function InsererVeterinaire(){
-		$vConn = site::fconnect();
-		$vSql = "INSERT INTO tpersonne VALUES ('{$this->telephone}','{$this->nom}','{$this->prenom}')";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
-		
-		$vSql = "INSERT INTO tveterinaire VALUES ('{$this->telephone}')";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
-	}
-	
-	function InsererEmployee(){
-		$vConn = site::fconnect();
-		$vSql = "INSERT INTO tpersonne VALUES ('{$this->telephone}','{$this->nom}','{$this->prenom}')";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
-		
-		$vSql = "INSERT INTO temployee VALUES ('{$this->telephone}')";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
-	}
-	
 	public static function Connection($telephone) {
-		$vConn = site::fconnect();
-		$vSql = "SELECT * FROM tpersonne WHERE telephone='$telephone'";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
+		$sql = "SELECT * FROM tpersonne WHERE telephone='$telephone'";
+		$res=DB::Sql($sql);
+		
+		$vResult = pg_fetch_array($res);
 		
 		return new Personne($vResult['telephone'], $vResult['nom'], $vResult['prenom']);
 	}
 	
 	
 	function Modifier($telephone){	
-		$vConn = site::fconnect();
-		$vSql = "UPDATE tpersonne SET telephone='{$this->telephone}',nom='{$this->nom}',prenom='{$this->prenom}' WHERE telephone='$telephone';";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);	
+		$sql = "UPDATE tpersonne SET telephone='{$this->telephone}',nom='{$this->nom}',prenom='{$this->prenom}' WHERE telephone='$telephone';";
+		$res=DB::Sql($sql);
 	}		
 	/*
 	public function Supprimer(){

@@ -28,14 +28,16 @@ Class Animal {
 	}
 	
 	public static function mesanimaux($telephone) {
-		$vConn = site::fconnect();
-		$vSql = "SELECT * FROM tanimal WHERE telephone='$telephone'";
-		$vQuery=pg_query($vConn, $vSql);
+		$sql = "SELECT * FROM tanimal WHERE telephone='$telephone'";
+		$res=DB::SqlToArray($sql);
 		
-		while($vResult = pg_fetch_array($vQuery)){
-			$res[] = new Animal($vResult['num_dossier'], $vResult['nom'], $vResult['poids'], $vResult['taille'], $vResult['genre'], $vResult['date_naiss'], $vResult['photo'], $vResult['race'], $vResult['espece'], $vResult['telephone']);
-		} 
-		return $res;
+		$res2 = array();
+		
+		foreach($res as $row) {
+			$res2[] = new Animal($row['num_dossier'], $row['nom'], $row['poids'], $row['taille'], $row['genre'], $row['date_naiss'], $row['photo'], $row['race'], $row['espece'], $row['telephone']);
+		}
+		
+		return $res2;
 	}
 
 	

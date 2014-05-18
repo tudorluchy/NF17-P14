@@ -4,17 +4,16 @@
 
 <div id="moncompte">
 	<h1> <?php echo($_SESSION['user']->nom) ?></h1>  
-	<a href="?module=personne&action=modif">Modifier mes informations personnelles</a>
+	<a href="?module=Personne&action=modif">Modifier mes informations personnelles</a>
 	<h2>Mes Animaux : </h2>
 	
 	
 	<?php 
-		$animal = animal::mesanimaux($_SESSION['user']->telephone);	
 		if (isset($animal)) {
 	?>
 	<table>
 		<tr>
-			<th> <div id='ajouter'> <a href="?module=animal&action=ajout"><img src='template/icone_ajouter.png'/></a> </div></th>
+			<th> <div id='ajouter'> <a href="?module=Animal&action=ajout"><img src='template/icone_ajouter.png'/></a> </div></th>
 			<th> Nom </th>
 			<th> Poids </th>
 			<th> Taille </th>
@@ -27,7 +26,7 @@
 		</tr>
 		<?php
 			foreach ($animal as $a) {
-			echo("<tr><td><div id='photo'><img src='template/upload/{$a->photo}.jpg'/></div></td><td>$a->nom</td><td>$a->poids</td><td>$a->taille</td><td>$a->genre</td><td>$a->date_naiss</td><td>$a->race</td><td>$a->espece</td><td><div id='modifier'><a href='?module=animal&action=modifier&animal=$a->num_dossier'><img src='template/icone_modifier.png'/></a></div></td><td><div id='supprimer'><a href='?module=animal&action=supprimer&animal=$a->num_dossier'><img src='template/icone_supprimer.png'/></a></div></td></tr>"); 
+			echo("<tr><td><div id='photo'><img src='template/upload/{$a->photo}.jpg'/></div></td><td>$a->nom</td><td>$a->poids</td><td>$a->taille</td><td>$a->genre</td><td>$a->date_naiss</td><td>$a->race</td><td>$a->espece</td><td><div id='modifier'><a href='?module=Animal&action=modifier&animal=$a->num_dossier'><img src='template/icone_modifier.png'/></a></div></td><td><div id='supprimer'><a href='?module=Animal&action=supprimer&animal=$a->num_dossier'><img src='template/icone_supprimer.png'/></a></div></td></tr>"); 
 			
 			}?>
 		
@@ -43,7 +42,6 @@
 	<h2>Mes Factures : </h2>
 		<?php 
 	
-		$facture = Facture::mesfactures($_SESSION['user']->telephone);
 		if (isset($facture)) {
 	?>
 	<table>

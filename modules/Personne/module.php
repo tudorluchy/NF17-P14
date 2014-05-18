@@ -7,6 +7,16 @@ include(INCLUDES."Session.class.php");
 include(INCLUDES."Site.class.php");
 
 switch ( Form::get('action') ){	
+	case 'verifConnexion':
+		verifConnexion();
+		break;
+	case 'deco':
+		deco();
+		break;
+/*	case 'login':
+		login();
+		break;
+*/
 	case 'valide':
 		validation();
 		break;
@@ -14,46 +24,90 @@ switch ( Form::get('action') ){
 		validation_admin();
 		break;
 	case 'modif':
-		if (session::ouverte()) { modif(); } else { site::redirect("?"); }
+		if (Session::ouverte()) { modif(); } 
+		else { 
+			Site::message_info('Veuillez vous connecter avant.');
+			Site::redirect("?"); 
+			}
 		break;
 	default:
-		if (session::ouverte()) { moncompte(); } else { inscription(); }
+		if (Session::ouverte()) { moncompte(); } else { inscription(); }
 		break;
+}
+
+// verification connexion
+function verifConnexion() {
+	
+	$error[] = Site::verif_Telephone('telephone', $_POST['telephone']);
+	
+	if (!Site::affiche_erreur($error)) {
+		$pers = Personne::Connection($_POST['telephone']);	
+		
+		Session::ouvrir($pers);
+		Site::message_info('Vous êtes désormais connecté sous le nom de ' . $pers->nom);
+		Site::redirect("?");
+	} else {
+		login();
+	}
+}
+
+function deco() {
+	if (Session::ouverte())
+	Session::fermer();
+	Site::message_info('Vous avez correctement été déconnecté');
+	Site::redirect("?");
+}
+
+function login(){
+	if (!Session::ouverte())
+		include('login.php');
+	else {
+		Site::message_info('Vous êtes déjà connecté');
+		Site::redirect("?");
+	}
 }
 
 function modif() {
 	$pers = new Personne ($_SESSION['user']->telephone, $_SESSION['user']->nom, $_SESSION['user']->prenom);
+	echo "coucou";
 	include('inscription.php');
 }
 
 function moncompte() {
-	$Cli = Client::ChercherParLogin($_SESSION['user']->login);	
+	$animal = Animal::mesanimaux($_SESSION['user']->telephone);	
+	$facture = Facture::mesfactures($_SESSION['user']->telephone);
 	include('moncompte.php');
 }
 
 function validation() {
 	$pers = new Personne($_POST['telephone'], $_POST['nom'], $_POST['prenom']);
 	
-	$error[] = site::verif_Text('nom', $_POST['nom']);
+	// problème : telephone existe déjà
+	if (Personne::Existe($_POST['telephone'])) {
+		Site::affiche_erreur('Impossible de créer le compte puisque ce telephone existe déjà.');
+		Site::redirect("?module=personne");
+	}
 	
-	$error[] = site::verif_Text('prenom', $_POST['prenom']);
+	$error[] = Site::verif_Text('nom', $_POST['nom']);
 	
-	$error[] = site::verif_Telephone('telephone', $_POST['telephone']);
+	$error[] = Site::verif_Text('prenom', $_POST['prenom']);
+	
+	$error[] = Site::verif_Telephone('telephone', $_POST['telephone']);
 	
 	
-	if (!site::affiche_erreur($error)) {
+	if (!Site::affiche_erreur($error)) {
 		        
 		if (!isset($_SESSION['user'])) {
 			$pers->Inserer();
-			site::message_info('Votre compte a correctement été créé');
+			Site::message_info('Votre compte a correctement été créé');
 			}
 		else {
 			$pers->Modifier($_SESSION['user']->telephone);
-			session::fermer();
-			site::message_info('Votre compte a correctement été modifié');
+			Session::fermer();
+			Site::message_info('Votre compte a correctement été modifié');
 			}
-		session::ouvrir($pers);
-		site::redirect("?module=personne&action=moncompte");			
+		Session::ouvrir($pers);
+		Site::redirect("?module=personne&action=moncompte");			
 	}
 	else 
 		include('inscription.php');
@@ -64,29 +118,29 @@ function validation_admin() {
 	
 	// problème : telephone existe déjà
 	if (Personne::Existe($_POST['telephone'])) {
-		site::affiche_erreur('Impossible de créer le compte puisque ce telephone existe déjà.');
-		site::redirect("?module=personne&action=administration");
+		Site::affiche_erreur('Impossible de créer le compte puisque ce telephone existe déjà.');
+		Site::redirect("?module=Personne&action=administration");
 	}
 	
-	$error[] = site::verif_Text('nom', $_POST['nom']);
+	$error[] = Site::verif_Text('nom', $_POST['nom']);
 	
-	$error[] = site::verif_Text('prenom', $_POST['prenom']);
+	$error[] = Site::verif_Text('prenom', $_POST['prenom']);
 	
-	$error[] = site::verif_Telephone('telephone', $_POST['telephone']);
+	$error[] = Site::verif_Telephone('telephone', $_POST['telephone']);
 	
-	$error[] = site::verif_Text('type', $_POST['type']);
+	$error[] = Site::verif_Text('type', $_POST['type']);
 	
-	if (!site::affiche_erreur($error)) {
+	if (!Site::affiche_erreur($error)) {
 		if ($_POST['type'] == 'veterinaire') {
-			$pers->InsererVeterinaire();
-			site::message_info('Le compte veterinaire a correctement été créé');
+			$pers->Inserer(constant('VETERINAIRE'));
+			Site::message_info('Le compte veterinaire a correctement été créé');
 		} else if ($_POST['type'] == 'employee') {
-			$pers->InsererEmployee();
-			site::message_info('Le compte employée a correctement été créé');
+			$pers->Inserer(constant('EMPLOYE'));
+			Site::message_info('Le compte employée a correctement été créé');
 		} else {
-			site::affiche_erreur('Les deux seuls types de comptes possibles à créer sont Veterinaire et Employée.');
+			Site::affiche_erreur('Les deux seuls types de comptes possibles à créer sont Veterinaire et Employée.');
 		}
-		site::redirect("?module=personne&action=administration");
+		Site::redirect("?module=Personne&action=administration");
 	} else {
 		include('administration.php');
 	}

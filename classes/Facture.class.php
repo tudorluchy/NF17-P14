@@ -30,23 +30,24 @@ Class Facture {
 	}
 	
 	public static function mesfactures($telephone){
-		$vConn = site::fconnect();
-		$vSql = "SELECT * FROM tfacture WHERE telephone_pers='$telephone'";
-		$vQuery=pg_query($vConn, $vSql);
+		$sql = "SELECT * FROM tfacture WHERE telephone_pers='$telephone'";
+		$res=DB::SqlToArray($sql);
+
+		$res2 = array();
 		
-		while($vResult = pg_fetch_array($vQuery)){
-			$res[] = new Facture($vResult['reference'], $vResult['montant'], $vResult['etat'], $vResult['mode_reglement'], $vResult['date_reglement'], $vResult['date_edition'], $vResult['telephone_emp'], $vResult['num_dossier'], $vResult['telephone_pers'], $vResult['race'], $vResult['espece']);
-		} 
-		return $res;
+		foreach($res as $row) {
+			$res2[] = new Facture($row['reference'], $row['montant'], $row['etat'], $row['mode_reglement'], $row['date_reglement'], $row['date_edition'], $row['telephone_emp'], $row['num_dossier'], $row['telephone_pers'], $row['race'], $row['espece']);
+		}
+		
+		return $res2;
 	}
 	
 	public static function detailfacture($reference){
-		$vConn = site::fconnect();
-		$vSql = "SELECT * FROM tfacture WHERE reference='$reference'";
-		$vQuery=pg_query($vConn, $vSql);
-		$vResult = pg_fetch_array($vQuery);
-		return new Facture($vResult['reference'], $vResult['montant'], $vResult['etat'], $vResult['mode_reglement'], $vResult['date_reglement'], $vResult['date_edition'], $vResult['telephone_emp'], $vResult['num_dossier'], $vResult['telephone_pers'], $vResult['race'], $vResult['espece']);
+		$sql = "SELECT * FROM tfacture WHERE reference='$reference'";
+		$res=DB::Sql($sql);
 		
+		$res2 = pg_fetch_array($res);
+		return new Facture($res2['reference'], $res2['montant'], $res2['etat'], $res2['mode_reglement'], $res2['date_reglement'], $res2['date_edition'], $res2['telephone_emp'], $res2['num_dossier'], $res2['telephone_pers'], $res2['race'], $res2['espece']);
 	}
 };
 
