@@ -6,7 +6,6 @@ if (!isset($pers)) {
 }
 ?>
 
-
 <form  enctype="multipart/form-data" name="inscription" action="?module=Personne&action=valide_admin" method="POST">
 	<fieldset>
 		
@@ -19,6 +18,10 @@ if (!isset($pers)) {
 		<label for="telephone">Télephone</label>
 		<input name="telephone" type="text" id="telephone" value="<?php if (isset($pers)) echo $pers->telephone; ?>">
 		
+		<label for="v">Vétérinaire</label>
+		<input type="radio" name="type" value="veterinaire" id="v">
+		<label for="e">Employé</label>
+		<input type="radio" name="type" value="employe" id="e" checked>
 		
 		<div class="bloc_inscrip">
 			<input  type="reset" name="reset" value="Reset"/>

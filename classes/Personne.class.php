@@ -74,6 +74,9 @@ Class Personne {
 	public static function Existe($telephone) {
 		$sql = "select count(*) as nb from tpersonne where telephone='$telephone'";
 		$res = DB::Sql($sql);
+		if (!$res) {
+			return false;
+		}
 		$res2 = pg_fetch_assoc($res);
 
 		// si telephone trouvé

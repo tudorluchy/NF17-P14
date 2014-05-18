@@ -6,7 +6,6 @@ if (!isset($pers)) {
 }
 ?>
 
-
 <form  enctype="multipart/form-data" name="inscription" action="?module=Personne&action=valide" method="POST">
 	<fieldset>
 		
