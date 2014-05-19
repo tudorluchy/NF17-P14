@@ -43,17 +43,24 @@ Class Personne {
 	function Modifier($telephone){	
 		$sql = "UPDATE tpersonne SET telephone='{$this->telephone}',nom='{$this->nom}',prenom='{$this->prenom}' WHERE telephone='$telephone';";
 		$res=DB::Sql($sql);
-	}		
-	/*
-	public function Supprimer(){
-		$sql="DELETE FROM ... WHERE id='{$this->id}'";
+	}
+			
+	
+	public static function SupprimerParTelephone($telephone){
+		if (self::isVeterinaire($telephone)) {
+			$sql="DELETE FROM tveterinaire WHERE telephone='$telephone'";
+			$res=DB::Sql($sql);	
+		} else if (self::isEmploye($telephone)) {
+			$sql="DELETE FROM temploye WHERE telephone='$telephone'";
+			$res=DB::Sql($sql);	
+		}
+		$sql="DELETE FROM tpersonne WHERE telephone='$telephone'";
 		$res=DB::Sql($sql);
-		$this->id=0;
 	}
 
 		//Méthodes statiques
 
-	
+	/*
 	public static function ChercherParLogin($login) {
 		$sql = "select * from tclient where login='$login'";
 		$res = DB::Sql($sql);
@@ -86,7 +93,38 @@ Class Personne {
 			return false;
 		}
 	}
+	
+	public static function isVeterinaire($telephone) {
+		$sql = "select count(*) as nb from tveterinaire where telephone='$telephone'";
+		$res = DB::Sql($sql);
+		if (!$res) {
+			return false;
+		}
+		$res2 = pg_fetch_assoc($res);
 
+		// si telephone trouvé
+		if ($res2['nb'] != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static function isEmploye($telephone) {
+		$sql = "select count(*) as nb from temploye where telephone='$telephone'";
+		$res = DB::Sql($sql);
+		if (!$res) {
+			return false;
+		}
+		$res2 = pg_fetch_assoc($res);
+
+		// si telephone trouvé
+		if ($res2['nb'] != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 };
 

@@ -100,32 +100,25 @@
 						<h3>Menu Utilisateur</h3>
 						<hr>
 						<ul>
-							
 							<?php
 								if (!Session::isConnected()) {
 									include_once ("./modules/Personne/connexion.php");?>
-									
 									<li><a href="?module=Personne">Créer un nouveau compte</a></li>
-									
 							<?php	}
 								else { ?>
-									<li><a href="?module=Personne&action=moncompte">Mon Compte</a></li>
+									<li><a href="?module=Personne&action=mon_compte">Mon Compte</a></li>
 									<?php
 									if (Session::isConnected() && Session::isAdmin()) {
 									?>
-										<li><a href="?module=Personne&action=administration">Administration</a></li>
+										<li><a href="?module=Personne&action=administration_menu">Administration</a></li>
 									<?php
 									}
 									?>
-									<li><a href="?module=Personne&action=deco">Se déconnecter</a></li>
+									<li><a href="?module=Personne&action=deconnection">Se déconnecter</a></li>
 									
 							<?php	}?>
-								
-							
 						</ul>
 					</div>
-					
-					
 						<div id="bloc">
 							<h3>Utilisateurs en ligne</h3>
 							<hr>
@@ -143,7 +136,6 @@
 						
 						<div style='clear: both'></div>
 					</div>
-			 
 					<?php
 						// Vous Ãªtes dÃ©connectÃ© / connectÃ©
 						if (Site::messages())
@@ -157,15 +149,10 @@
 					<?php
 						// Vous Ãªtes dÃ©connectÃ© / connectÃ©
 						if(Site::messages())
-							
 							Site::liste_message();
-						
 					?>
 				</div>
-
 			</div>
-		
-		
 		<div id='footer'>
 			Texte footer
 		</div>

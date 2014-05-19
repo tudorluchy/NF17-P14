@@ -4,7 +4,7 @@
 
 <div id="moncompte">
 	<h1> <?php echo($_SESSION['user']->nom) ?></h1>  
-	<a href="?module=Personne&action=modif">Modifier mes informations personnelles</a>
+	<li><a href="?module=Personne&action=modification_compte">Modifier mes informations personnelles</a></li>
 	<h2>Mes Animaux : </h2>
 	
 	

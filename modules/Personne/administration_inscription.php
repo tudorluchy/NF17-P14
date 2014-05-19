@@ -1,12 +1,12 @@
 <?php 
 if (!isset($pers)) {
-	echo("<h1>Inscription d'un nouvel utilisateur</h1>");
+	echo("<h1>Création d'un nouvel utilisateur</h1>");
 } else { 
 	echo("<h1>Modification du compte</h1>");
 }
 ?>
 
-<form  enctype="multipart/form-data" name="inscription" action="?module=Personne&action=valide_admin" method="POST">
+<form  enctype="multipart/form-data" name="inscription" action="?module=Personne&action=validation_administration_inscription" method="POST">
 	<fieldset>
 		
 		<label for="nom">Nom :</label>
