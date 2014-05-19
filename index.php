@@ -29,12 +29,28 @@
 		<link rel="stylesheet" type="text/css" href="css/menu/component.css" />
 		<script src="js/menu/modernizr.custom.js"></script>
 		<script src="js/jquery-2.1.1.min.js"></script>
+		<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="js/slider/jquery.bxslider.min.js"></script>
 		<link href="css/slider/jquery.bxslider.css" rel="stylesheet" />
+		<link href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 		<script type="text/javascript">
 		$(document).ready(function(){
 			  $('.bxslider').bxSlider();
 			});
+			
+			 $( "#date_naiss" ).datepicker({
+				  changeMonth: true,
+				  changeYear: true,
+				  dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+				  dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+				  dayNamesShort: [ "Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam" ],
+				  gotoCurrent: true,
+				  monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre" ],
+				  monthNamesShort: [ "Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Dec" ],
+				  prevText: "Préc",
+				  nextText: "Suiv",
+				  yearRange: "1990:2014"
+				});
 		</script>
 	</head>
 	<body>
@@ -48,15 +64,10 @@
 					<a href="?">Accueil</a>
 				</li>
 				<li>
-					<a href="#">Veggie made</a>
+					<a href="?module=Veterinaire">Rendez-vous</a>
 					<ul class="cbp-tm-submenu">
-						<li><a href="#" class="cbp-tm-icon-archive">Sorrel desert</a></li>
-						<li><a href="#" class="cbp-tm-icon-cog">Raisin kakadu</a></li>
-						<li><a href="#" class="cbp-tm-icon-location">Plum salsify</a></li>
-						<li><a href="#" class="cbp-tm-icon-users">Bok choy celtuce</a></li>
-						<li><a href="#" class="cbp-tm-icon-earth">Onion endive</a></li>
-						<li><a href="#" class="cbp-tm-icon-location">Bitterleaf</a></li>
-						<li><a href="#" class="cbp-tm-icon-mobile">Sea lettuce</a></li>
+						<li><a href="?module=Veterinaire&action=ajout_rdv">Ajouter un rendez-vous</a></li>
+						<li><a href="?module=Veterinaire&action=ajout_animal">Ajouter un animal</a></li>
 					</ul>
 				</li>
 				<li>

@@ -11,7 +11,7 @@ define("TAILLETEL", 10);
 define("MAXTEXTAREA", 20000);
 define("MINTEXTAREA", 2);  
 
-define("DATES", "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#");	
+define("DATES", "^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$");	
 
 define("MAIL", '#^([a-zA-Z0-9]+(([\.\-\_]?[a-zA-Z0-9]+)+)?)\@(([a-zA-Z0-9]+[\.\-\_])+[a-zA-Z])#');
 define("MAXMAIL", 30);
@@ -212,34 +212,6 @@ ENDOFMESSAGE;
 		}
 		*/
 		
-		static function upload($dossier, $tab){
-			$error = false;
-
-			if($tab['photo']['name'] == "")
-				$fichier = "icone_defaut";
-			else {	
-				$extensions = array(".png",".jpg",".jpeg",".bmp",".PNG",".JPG",".JPEG",".BMP");
-				$fichier=uniqid();
-				$extension = strrchr($tab['photo']['name'], '.');
-				
-				if(!in_array($extension, $extensions)){
-					self::message("Mauvaise extension de fichier");
-					$error = true;
-				}
-				
-				if(!move_uploaded_file($tab['photo']['tmp_name'], $dossier.$fichier.".png")) {
-					self::message("L'upload a échoué");
-					$error = true;
-					}
-				}	
-				if($error == true)
-					return ("");
-						
-				else	{
-					$fichier .=".png";	
-					return ($fichier);
-				}
-		}
 		
 		static function verif_Text($champs, $text) {
 		$error = "";
@@ -335,7 +307,7 @@ ENDOFMESSAGE;
 	
 	}
 	
-	static function verif_date($champs, $date) {
+	static function verif_Date($champs, $date) {
 		$error = "";
 		
 		if($date == '')	

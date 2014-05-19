@@ -9,19 +9,17 @@ Class Animal {
 	public $taille;
 	public $genre;
 	public $date_naiss;
-	public $photo;
 	public $race;
 	public $espece;
 	public $telephone;
 	
-	function __construct ($num_dossier, $nom, $poids, $taille, $genre, $date_naiss, $photo, $race, $espece, $telephone){
+	function __construct ($num_dossier, $nom, $poids, $taille, $genre, $date_naiss, $race, $espece, $telephone){
 		$this->num_dossier = $num_dossier;
 		$this->nom = $nom;
 		$this->poids = $poids;
 		$this->taille = $taille;
 		$this->genre = $genre;
 		$this->date_naiss = $date_naiss;
-		$this->photo = $photo;
 		$this->race = $race;
 		$this->espece = $espece;
 		$this->telephone = $telephone;
@@ -39,47 +37,14 @@ Class Animal {
 		
 		return $res2;
 	}
-
 	
-	/* 
-	public function Supprimer(){
-		$sql="DELETE FROM ... WHERE id='{$this->id}'";
+
+	function Inserer(){
+		$sql = "INSERT INTO tanimal VALUES ('{$this->num_dossier}','{$this->nom}','{$this->poids}','{$this->taille}','{$this->genre}','{$this->date_naiss}', '{$this->race}','{$this->espece}','{$this->telephone}')";
 		$res=DB::Sql($sql);
-		$this->id=0;
+		var_dump($res);
+		die;
 	}
-
-		//Méthodes statiques
-
-	
-	public static function ChercherParLogin($login) {
-		$sql = "select * from tclient where login='$login'";
-		$res = DB::Sql($sql);
-		$res2 = pg_fetch_assoc($res);
-		
-		// si login et mdp trouvés alors, il peut se connecter.
-		if (!empty($res2)) {
-			$c = new Client();
-			$c->Creer($res2['login'],$res2['mdp'],$res2['nom'],$res2['prenom'],$res2['adresse'],$res2['age'],$res2['adresse'],$res2['pointfidelite'],'client');
-			return $c;
-		} else {
-			return false;
-		}
-	}
-	
-	public static function Existe($login) {
-		$sql = "select count(*) as nb from tclient where login='$login'";
-		$res = DB::Sql($sql);
-		$res2 = pg_fetch_assoc($res);
-
-		// si login trouvér.
-		if ($res2['nb'] != 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	*/
 };
 
 ?>

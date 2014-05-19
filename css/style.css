@@ -29,9 +29,6 @@
 
 	width : 40px;
 }
-#photo {
-	width : 120px;
-}
 
 #page {
 	max-width: 1000px;
@@ -107,23 +104,6 @@ span {
 }
 
 
-table {
-	border: 3px groove #47a3da;
-	
-}
-tr {
-	border: 3px groove #47a3da;
-	padding : 0.5em;
-}
-th{
-	background : #47a3da;
-	padding : 0.5em;
-	font-weight: bold;
-	color : white;
-}
-td {
-	padding : 0.5em;
-}
 
 
 #formulaire {
@@ -157,6 +137,25 @@ div#colonne_gauche,div#colonne_droite,div#contenu {
 	min-height: 600px;
 }
 
+/* ----------- Mon Compte ----------- */
+#moncompte table {
+	border: 3px groove #47a3da;
+	background : white;
+	
+}
+#moncompte tr {
+	border: 3px groove #47a3da;
+	padding : 0.5em;
+}
+#moncompte th{
+	background : #47a3da;
+	padding : 0.5em;
+	font-weight: bold;
+	color : white;
+}
+#moncompte td {
+	padding : 0.5em;
+}
 
 /* ----------- Messages ----------- */
 #message_erreur, #message_warning, #message_info {

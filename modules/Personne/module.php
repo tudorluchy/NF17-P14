@@ -67,15 +67,20 @@ function connexion() {
 
 // verification connexion
 function verification_connexion() {
-	
+
 	$error[] = Site::verif_Telephone('telephone', Form::get('telephone'));
 	
 	if (!Site::affiche_erreur($error)) {
 		$pers = Personne::Connection(Form::get('telephone'));	
-		
-		Session::ouvrir($pers);
-		Site::message_info('Vous êtes désormais connecté sous le nom de ' . $pers->nom);
-		Site::redirect("?");
+		if (isset($pers->telephone)) {
+			Session::ouvrir($pers);
+			Site::message_info('Vous êtes désormais connecté sous le nom de ' . $pers->nom);
+			Site::redirect("?");
+		}
+		else {
+			Site::message_info('Les informations transmises n\'ont pas permis de vous authentifier.');
+			connexion();
+		}
 	} else {
 		connexion();
 	}
