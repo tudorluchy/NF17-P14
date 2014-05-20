@@ -72,6 +72,7 @@ function verification_connexion() {
 	
 	if (!Site::affiche_erreur($error)) {
 		$pers = Personne::Connection(Form::get('telephone'));	
+
 		if (isset($pers->telephone)) {
 			Session::ouvrir($pers);
 			Site::message_info('Vous êtes désormais connecté sous le nom de ' . $pers->nom);

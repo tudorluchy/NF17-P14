@@ -13,10 +13,10 @@ if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
 // distant
 } else {
 	// données pour la connexion à la base de données en prod
-	define("DB_HOST","");
-	define("DB_USER","");
-	define("DB_PASS","");
-	define("BASE","");
+	define("DB_HOST","tuxa.sme.utc");
+	define("DB_USER","nf17p026");
+	define("DB_PASS","5OzDifpQ");
+	define("BASE","dbnf17p026");
 
     // affiche aucune erreur ou warning PHP en production
     error_reporting(0);

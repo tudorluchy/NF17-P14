@@ -19,10 +19,10 @@ class DB {
 		if (!self::$Base) {
 			self::Init();
 		}
- 
+
 		@pg_query("SET NAMES UTF8");
 		$resultat = @pg_query($requete);
- 
+
 		if (pg_last_error()>0) {
 			Site::message("Erreur".pg_error()."'",ERREUR);
 		} else {

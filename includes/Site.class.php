@@ -143,43 +143,7 @@ class Site {
 			echo "</pre>";
 		}
 		 
-		/**
-		* affiche un message utilisateur
-		*
-		* $message : message affiché
-		* $type : type du message (défaut INFO)
-		*/
-		/*static function message($message, $type=INFO)
-		{ 
-			switch($type)
-			{
-				case INFO: 
-					$class='info';
-					$img='<img src="template/information.png"/>';
-					break;
-				case ERREUR: 
-					$class='erreur';
-					$img='<img src="template/error.png"/>';
-					break;
-				case OK: 
-					$class='ok';
-					$img='<img src="template/check.png"/>';
-					break;
-				case ALERTE: 
-					$class='alerte';
-					break;
-				default:$class='info';
-			}
-		 
-			print <<< ENDOFMESSAGE
-		 
-				<div id='zonemessage'>
-					<p class='$class'>$img $message</p>
-				</div>
-		 
-ENDOFMESSAGE;
-		}*/
-		
+
 		static function message($message, $type='INFO') {
 			switch($type) {
 				case INFO : { $div = "#message_info"; $img = 'information'; break;}
@@ -263,22 +227,6 @@ ENDOFMESSAGE;
 			return ($error);
 	}
 	
-	static function verif_Textarea($champs, $textarea) {
-		$error = "";
-	
-		if($textarea == '') 
-			if ($champs == '')
-				$error = "Veuillez remplir ce champ svp";
-			else
-				$error = "Veuillez remplir le champ '".$champs."' svp";
-
-		else if ((MAXTEXTAREA < strlen($textarea)) || (MINTEXTAREA > strlen($textarea))) 
-				if ($champs == '')
-					$error = "La taille de ce champ doit être comprise entre ".MINTEXTAREA." et ".MAXTEXTAREA." caractères";
-				else
-					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINTEXTAREA." et ".MAXTEXTAREA." caractères";
-		return ($error);
-	}
 	
 	
 	static function verif_mail($champs, $mail) {
@@ -326,38 +274,6 @@ ENDOFMESSAGE;
 		return ($error);
 	}
 	
-	static function verif_pass1($champs, $pass) {
-		$error = "";
-		
-		if($pass  == '') {
-			if ($champs == '')
-				$error = "Veuillez remplir ce champ svp";
-			else
-				$error = "Veuillez remplir le champ '".$champs."' svp";
-			}
-		else{	
-			if(! preg_match(PWD, $pass))
-				if ($champs == '')
-					$error = "Veuillez remplir correctement ce champ svp";
-				else
-					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
-					
-			if ((MAXPWD < strlen($pass)) || (MINPWD > strlen($pass)))
-				if ($champs == '')
-					$error = "La taille de ce champ doit être comprise entre ".MINPWD." et ".MAXPWD." caractères";
-				else
-					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINPWD." et ".MAXPWD." caractères";
-			 }
-		return ($error);
-	}
-	
-	static function verif_pass2($pass1, $pass2) {
-		$error = "";
-			if($pass1 != $pass2) {			
-				$error[] = "Les deux mot de passe ne correspondent pas";
-			}	
-		return($error);
-	}
 	
 	static function affiche_erreur($tab){
 		$error = false;

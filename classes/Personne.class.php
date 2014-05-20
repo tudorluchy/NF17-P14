@@ -31,9 +31,9 @@ Class Personne {
 	}
 
 	public static function Connection($telephone) {
+	
 		$sql = "SELECT * FROM tpersonne WHERE telephone='$telephone'";
 		$res=DB::Sql($sql);
-		
 		$vResult = pg_fetch_array($res);
 		
 		return new Personne($vResult['telephone'], $vResult['nom'], $vResult['prenom']);
