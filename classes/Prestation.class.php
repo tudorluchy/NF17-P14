@@ -26,8 +26,22 @@ Class Prestation {
 		}
 	}
 	
+	public static function GetListeInterventionsAvecPrix() {
+		$sql = "SELECT i.nom_inter, pi.nom_espece, pi.nom_race, pi.prix FROM tintervention i LEFT JOIN prixintervention pi ON i.nom_inter = pi.nom_inter";
+		$res=DB::SqlToArray($sql);
+		
+		return $res;
+	}
+	
+	public static function GetListeConsultationsAvecPrix() {
+		$sql = "SELECT c.nom, pc.nom_espece, pc.prix FROM tconsultation c LEFT JOIN prixconsultation pc ON c.nom = pc.nom_consult";
+		$res=DB::SqlToArray($sql);
+		
+		return $res;
+	}
+	
 	public static function Existe($nom) {
-		$sql = "select count(*) as nb from tprestation where telephone='$nom'";
+		$sql = "select count(*) as nb from tprestation where nom='$nom'";
 		$res = DB::Sql($sql);
 		if (!$res) {
 			return false;
@@ -43,7 +57,7 @@ Class Prestation {
 	}
 	
 	public static function isIntervention($nom) {
-		$sql = "select count(*) as nb from tintervention where telephone='$nom'";
+		$sql = "select count(*) as nb from tintervention where nom='$nom'";
 		$res = DB::Sql($sql);
 		if (!$res) {
 			return false;
@@ -59,7 +73,7 @@ Class Prestation {
 	}
 
 	public static function isConsultation($nom) {
-		$sql = "select count(*) as nb from tconsultation where telephone='$nom'";
+		$sql = "select count(*) as nb from tconsultation where nom='$nom'";
 		$res = DB::Sql($sql);
 		if (!$res) {
 			return false;

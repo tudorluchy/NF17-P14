@@ -4,6 +4,14 @@ define("TEXTE", '/^[a-zA-Z0-9]+([\-\_\!\?\/][a-zA-Z0-9])*/');
 define("MAXTEXT", 50);
 define("MINTEXT", 2);  
 
+define("NUMBER", '/^[0-9]+$/');
+define("MAXNUMBER", 50);
+define("MINNUMBER", 1); 
+
+define("REAL", '/^-?(?:\d+|\d*\.\d+)$/');
+define("MAXREAL", 50);
+define("MINREAL", 1); 
+
 define("TEL", '#^0[1-68][0-9]{8}$#');
 define("TAILLETEL", 10);
 
@@ -194,6 +202,56 @@ class Site {
 					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINTEXT." et ".MAXTEXT." caractères";
 
 			else if(! preg_match(TEXTE, $text))
+				if ($champs == '')
+					$error = "Veuillez remplir correctement ce champ svp";
+				else
+					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
+		}
+			return ($error);
+	}
+	
+	static function verif_Number($champs, $text) {
+		$error = "";
+		
+		if($text == '') 
+			if ($champs == '')
+				$error = "Veuillez remplir ce champ svp";
+			else	
+				$error = "Veuillez remplir le champ '".$champs."' svp";
+				
+		else {
+			if ((MAXNUMBER < strlen($text)) || (MINNUMBER > strlen($text)))
+				if ($champs == '')
+					$error = "La taille de ce champ doit être comprise entre ".MINNUMBER." et ".MAXNUMBER." caractères";
+				else
+					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINNUMBER." et ".MAXNUMBER." caractères";
+
+			else if(! preg_match(NUMBER, $text))
+				if ($champs == '')
+					$error = "Veuillez remplir correctement ce champ svp";
+				else
+					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
+		}
+			return ($error);
+	}
+	
+	static function verif_Real($champs, $text) {
+		$error = "";
+		
+		if($text == '') 
+			if ($champs == '')
+				$error = "Veuillez remplir ce champ svp";
+			else	
+				$error = "Veuillez remplir le champ '".$champs."' svp";
+				
+		else {
+			if ((MAXREAL < strlen($text)) || (MINREAL > strlen($text)))
+				if ($champs == '')
+					$error = "La taille de ce champ doit être comprise entre ".MINREAL." et ".MAXREAL." caractères";
+				else
+					$error = "La taille de votre champ '".$champs."' doit être comprise entre ".MINREAL." et ".MAXREAL." caractères";
+
+			else if(! preg_match(REAL, $text))
 				if ($champs == '')
 					$error = "Veuillez remplir correctement ce champ svp";
 				else

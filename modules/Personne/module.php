@@ -51,11 +51,23 @@ switch ( Form::get('action') ){
 	case 'employe_inscription_prestation':
 		employe_inscription_prestation();
 		break;
+	case 'employe_inscription_produit':
+		employe_inscription_produit();
+		break;
+	case 'employe_liste_prestation':
+		employe_liste_prestation();
+		break;
 	case 'validation_employe_inscription_espece':
 		validation_employe_inscription_espece();
 		break;
 	case 'validation_employe_inscription_race':
 		validation_employe_inscription_race();
+		break;
+	case 'validation_employe_inscription_prestation':
+		validation_employe_inscription_prestation();
+		break;
+	case 'validation_employe_inscription_produit':
+		validation_employe_inscription_produit();
 		break;
 	default:
 		if (Session::ouverte()) { 
@@ -141,6 +153,16 @@ function employe_inscription_race(){
 
 function employe_inscription_prestation(){
 	include('employe_inscription_prestation.php');
+}
+
+function employe_inscription_produit(){
+	include('employe_inscription_produit.php');
+}
+
+function employe_liste_prestation() {
+	$liste_interventions = Prestation::GetListeInterventionsAvecPrix();
+	$liste_consultations = Prestation::GetListeConsultationsAvecPrix();
+	include('employe_liste_prestation.php');
 }
 
 function mon_compte() {
@@ -269,7 +291,7 @@ function validation_employe_inscription_prestation() {
 		Site::redirect("?module=Personne&action=employe_menu");
 	}
 	
-	$error[] = Site::verif_Text('espece', Form::get('nom'));
+	$error[] = Site::verif_Text('nom', Form::get('nom'));
 	$error[] = Site::verif_Text('type', Form::get('type'));
 	
 	if (!Site::affiche_erreur($error)) {
@@ -279,7 +301,7 @@ function validation_employe_inscription_prestation() {
 			$prestation->Inserer(constant('INTERVENTION'));
 			Site::message_info('La prestation de type intervention a correctement été créé');
 		} else if (Form::get('type') == 'consultation') {
-			$pers->Inserer(constant('CONSULTATION'));
+			$prestation->Inserer(constant('CONSULTATION'));
 			Site::message_info('La prestation de type consultation a correctement été créé');
 		} else {
 			Site::message_info('Les deux seuls types de prestations possibles à créer sont Intervention et Consultation.');
@@ -287,5 +309,35 @@ function validation_employe_inscription_prestation() {
 		Site::redirect("?module=Personne&action=employe_menu");
 	} else {
 		employe_inscription_prestation();
+	}
+}
+
+function validation_employe_inscription_produit() {
+	// problème : produit existe déjà
+	if (Produit::Existe(Form::get('nom'))) {
+		Site::message_info('Impossible de créer le produit puisque celui-ci existe déjà.');
+		Site::redirect("?module=Personne&action=employe_menu");
+	}
+	
+	$error[] = Site::verif_Text('nom', Form::get('nom'));
+	$error[] = Site::verif_Number('stock', Form::get('stock'));
+	$error[] = Site::verif_Real('prix', Form::get('prix'));
+	$error[] = Site::verif_Text('type', Form::get('type'));
+	
+	if (!Site::affiche_erreur($error)) {
+		$produit = new Produit(Form::get('nom'), Form::get('stock'), Form::get('prix'));
+		
+		if (Form::get('type') == 'produit') {
+			$produit->Inserer();
+			Site::message_info('Le produit simple a correctement été créé');
+		} else if (Form::get('type') == 'medicament') {
+			$produit->Inserer(constant('MEDICAMENT'));
+			Site::message_info('Le médicament a correctement été créé');
+		} else {
+			Site::message_info('Les deux seuls types de produits possibles à créer sont Produit simple et Médicament.');
+		}
+		Site::redirect("?module=Personne&action=employe_menu");
+	} else {
+		employe_inscription_produit();
 	}
 }

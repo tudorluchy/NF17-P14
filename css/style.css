@@ -290,3 +290,24 @@ fieldset span, fieldset input{
  fieldset {
  	border : 0px !important;
  }
+ 
+ /* ajouts */
+ 
+ table {
+	font-family:Verdana,Calibri,Arial;
+	font-size:0.9em;
+	
+	text-align:center; 
+	padding:10px; 
+	border-spacing:0; 
+	border-collapse : collapse;
+	-moz-border-radius:5px; 
+	-webkit-border-radius:5px; 
+	-khtml-border-radius:5px;		
+	border: 1px solid black;
+}
+
+table tr td
+{
+	padding: 10px; /* Marge à l'intérieur des cellules, équivalent de cellpadding */
+}
