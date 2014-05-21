@@ -16,6 +16,14 @@ switch ( Form::get('action') ){
 	case 'validation_inscription':
 		validation_inscription();
 		break;
+	case 'modification_compte':
+		if (Session::ouverte()) {
+			 modification_compte(); 
+		} else { 
+			Site::message_info('Veuillez vous connecter avant.');
+			Site::redirect("?"); 
+		}
+		break;
 	case 'administration_menu':
 		administration_menu();
 		break;
@@ -31,13 +39,20 @@ switch ( Form::get('action') ){
 	case 'validation_administration_suppresion':
 		validation_administration_suppresion();
 		break;	
-	case 'modification_compte':
-		if (Session::ouverte()) {
-			 modification_compte(); 
-		} else { 
-			Site::message_info('Veuillez vous connecter avant.');
-			Site::redirect("?"); 
-		}
+	case 'employe_menu':
+		employe_menu();
+		break;
+	case 'employe_inscription_espece':
+		employe_inscription_espece();
+		break;
+	case 'employe_inscription_race':
+		employe_inscription_race();
+		break;
+	case 'validation_employe_inscription_espece':
+		validation_employe_inscription_espece();
+		break;
+	case 'validation_employe_inscription_race':
+		validation_employe_inscription_race();
 		break;
 	default:
 		if (Session::ouverte()) { 
@@ -108,6 +123,19 @@ function administration_suppresion(){
 	include('administration_suppresion.php');
 }
 
+function employe_menu(){
+	include('employe_menu.php');
+}
+
+function employe_inscription_espece(){
+	include('employe_inscription_espece.php');
+}
+
+function employe_inscription_race(){
+	$liste_especes = Espece::GetListeEspeces();
+	include('employe_inscription_race.php');
+}
+
 function mon_compte() {
 	$animal = Animal::mesanimaux($_SESSION['user']->telephone);	
 	$facture = Facture::mesfactures($_SESSION['user']->telephone);
@@ -150,8 +178,8 @@ function validation_inscription() {
 function validation_administration_inscription() {
 	// problème : telephone existe déjà
 	if (Personne::Existe(Form::get('telephone'))) {
-		Site::affiche_erreur('Impossible de créer le compte puisque ce telephone existe déjà.');
-		Site::redirect("?module=Personne&action=administration");
+		Site::message_info('Impossible de créer le compte puisque ce telephone existe déjà.');
+		Site::redirect("?module=Personne&action=administration_menu");
 	}
 	
 	$error[] = Site::verif_Text('nom', Form::get('nom'));
@@ -188,3 +216,41 @@ function validation_administration_suppresion() {
 	Site::redirect("?module=Personne&action=administration_suppresion");
 }
 
+function validation_employe_inscription_espece() {
+	// problème : espece existe déjà
+	if (Espece::Existe(Form::get('nom'))) {
+		Site::message_info('Impossible de créer l\'espèce puisque celle-ci existe déjà.');
+		Site::redirect("?module=Personne&action=employe_menu");
+	}
+	
+	$error[] = Site::verif_Text('espece', Form::get('nom'));
+	
+	if (!Site::affiche_erreur($error)) {
+		$espece = new Espece(Form::get('nom'));
+		
+		$espece->Inserer();
+		Site::message_info('Votre espèce a correctement été créé');
+	} else {
+		employe_inscription_espece();
+	}
+}
+
+function validation_employe_inscription_race() {
+	// problème : race existe déjà
+	if (Race::Existe(Form::get('nom'), Form::get('espece'))) {
+		Site::message_info('Impossible de créer la race puisque celle-ci existe déjà.');
+		Site::redirect("?module=Personne&action=employe_menu");
+	}
+	
+	$error[] = Site::verif_Text('espece', Form::get('espece'));
+	$error[] = Site::verif_Text('nom', Form::get('nom'));
+	
+	if (!Site::affiche_erreur($error)) {
+		$race = new Race(Form::get('nom'), Form::get('espece'));
+		
+		$race->Inserer();
+		Site::message_info('Votre race a correctement été créé');
+	} else {
+		employe_inscription_race();
+	}
+}

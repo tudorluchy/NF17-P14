@@ -177,7 +177,7 @@ class Site {
 		*/
 		
 		
-		static function verif_Text($champs, $text) {
+	static function verif_Text($champs, $text) {
 		$error = "";
 		
 		if($text == '') 

@@ -121,12 +121,25 @@
 									<?php
 									if (Session::isConnected() && Session::isAdmin()) {
 									?>
-										<li><a href="?module=Personne&action=administration_menu">Administration</a></li>
+										<li><a href="?module=Personne&action=administration_menu">Menu administration</a></li>
+									<?php
+									}
+									?>
+									<?php
+									if (Session::isConnected() && Session::isEmploye()) {
+									?>
+										<li><a href="?module=Personne&action=employe_menu">Menu employé</a></li>
+									<?php
+									}
+									?>
+									<?php
+									if (Session::isConnected() && Session::isVeterinaire()) {
+									?>
+										<li><a href="?module=Personne&action=veterinaire_menu">Menu vétérinaire</a></li>
 									<?php
 									}
 									?>
 									<li><a href="?module=Personne&action=deconnection">Se déconnecter</a></li>
-									
 							<?php	}?>
 						</ul>
 					</div>

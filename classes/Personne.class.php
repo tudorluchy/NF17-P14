@@ -25,7 +25,7 @@ Class Personne {
 			$sql = "INSERT INTO tveterinaire VALUES ('{$this->telephone}')";
 			$res=DB::Sql($sql);
 		} else if ($type == EMPLOYE) {
-			$sql = "INSERT INTO temployee VALUES ('{$this->telephone}')";
+			$sql = "INSERT INTO temploye VALUES ('{$this->telephone}')";
 			$res=DB::Sql($sql);
 		}
 	}

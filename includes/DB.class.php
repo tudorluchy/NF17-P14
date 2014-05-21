@@ -7,6 +7,7 @@ class DB {
  	//tente la connexion sur le SGBD, en utilisant des constantes définies
 	static function Init() {
 		$connectionString = "host=".DB_HOST." port=5432 dbname=".BASE." user=".DB_USER." password=".DB_PASS;
+		//echo $connectionString;
 		self::$Base = pg_connect($connectionString);
 		if (pg_last_error()>0) {
 			Site::message("Impossible d'ouvrir la base",ERREUR);
@@ -20,9 +21,11 @@ class DB {
 			self::Init();
 		}
 
-		@pg_query("SET NAMES UTF8");
-		$resultat = @pg_query($requete);
-
+//		@pg_query("SET NAMES UTF8");
+//		$resultat = @pg_query($requete);
+		pg_query("set client_encoding to UTF8");
+		$resultat = pg_query($requete);
+		
 		if (pg_last_error()>0) {
 			Site::message("Erreur".pg_error()."'",ERREUR);
 		} else {

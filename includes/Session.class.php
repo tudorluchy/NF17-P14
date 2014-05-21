@@ -50,5 +50,23 @@ class Session
 			return false;
 		}
 	}
+	
+	static function isEmploye()
+	{
+		if (Personne::isEmploye($_SESSION['user']->telephone)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	static function isVeterinaire()
+	{
+		if (Personne::isVeterinaire($_SESSION['user']->telephone)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>
