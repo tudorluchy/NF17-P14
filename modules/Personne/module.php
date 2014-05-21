@@ -48,6 +48,9 @@ switch ( Form::get('action') ){
 	case 'employe_inscription_race':
 		employe_inscription_race();
 		break;
+	case 'employe_inscription_prestation':
+		employe_inscription_prestation();
+		break;
 	case 'validation_employe_inscription_espece':
 		validation_employe_inscription_espece();
 		break;
@@ -136,6 +139,10 @@ function employe_inscription_race(){
 	include('employe_inscription_race.php');
 }
 
+function employe_inscription_prestation(){
+	include('employe_inscription_prestation.php');
+}
+
 function mon_compte() {
 	$animal = Animal::mesanimaux($_SESSION['user']->telephone);	
 	$facture = Facture::mesfactures($_SESSION['user']->telephone);
@@ -197,7 +204,7 @@ function validation_administration_inscription() {
 			$pers->Inserer(constant('EMPLOYE'));
 			Site::message_info('Le compte employée a correctement été créé');
 		} else {
-			Site::message_info('Les deux seuls types de comptes possibles à créer sont Veterinaire et Employée.');
+			Site::message_info('Les deux seuls types de comptes possibles à créer sont Veterinaire et Employé.');
 		}
 		Site::redirect("?module=Personne&action=administration_menu");
 	} else {
@@ -252,5 +259,33 @@ function validation_employe_inscription_race() {
 		Site::message_info('Votre race a correctement été créé');
 	} else {
 		employe_inscription_race();
+	}
+}
+
+function validation_employe_inscription_prestation() {
+	// problème : prestation existe déjà
+	if (Espece::Existe(Form::get('nom'))) {
+		Site::message_info('Impossible de créer la prestation puisque celle-ci existe déjà.');
+		Site::redirect("?module=Personne&action=employe_menu");
+	}
+	
+	$error[] = Site::verif_Text('espece', Form::get('nom'));
+	$error[] = Site::verif_Text('type', Form::get('type'));
+	
+	if (!Site::affiche_erreur($error)) {
+		$prestation = new Prestation(Form::get('nom'));
+		
+		if (Form::get('type') == 'intervention') {
+			$prestation->Inserer(constant('INTERVENTION'));
+			Site::message_info('La prestation de type intervention a correctement été créé');
+		} else if (Form::get('type') == 'consultation') {
+			$pers->Inserer(constant('CONSULTATION'));
+			Site::message_info('La prestation de type consultation a correctement été créé');
+		} else {
+			Site::message_info('Les deux seuls types de prestations possibles à créer sont Intervention et Consultation.');
+		}
+		Site::redirect("?module=Personne&action=employe_menu");
+	} else {
+		employe_inscription_prestation();
 	}
 }
