@@ -70,22 +70,16 @@
 					<a href="?">Accueil</a>
 				</li>
 				<li>
-					<a href="?module=Veterinaire">Rendez-vous</a>
+					<a href="?module=Employe">Employe</a>
 					<ul class="cbp-tm-submenu">
-						<li><a href="?module=Employe&action=ajout_rdv">Ajouter un rendez-vous</a></li>
-						<li><a href="?module=Employe&action=ajout_animal">Ajouter un animal</a></li>
+						<li><a href="?module=Employe&action=ajout_rdv" class="cbp-tm-icon-archive">Ajouter un rendez-vous</a></li>
+						<li><a href="?module=Employe&action=ajout_animal" class="cbp-tm-icon-pencil">Ajouter un animal</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="#">Pepper tatsoi</a>
+					<a href="?module=Veterinaire">Veterinaire</a>
 					<ul class="cbp-tm-submenu">
-						<li><a href="#" class="cbp-tm-icon-archive">Brussels sprout</a></li>
-						<li><a href="#" class="cbp-tm-icon-cog">Kakadu lemon</a></li>
-						<li><a href="#" class="cbp-tm-icon-link">Juice green</a></li>
-						<li><a href="#" class="cbp-tm-icon-users">Wine fruit</a></li>
-						<li><a href="#" class="cbp-tm-icon-earth">Garlic mint</a></li>
-						<li><a href="#" class="cbp-tm-icon-location">Zucchini garnish</a></li>
-						<li><a href="#" class="cbp-tm-icon-mobile">Sea lettuce</a></li>
+						<li><a href="?module=Veterinaire" class="cbp-tm-icon-archive">Mes rendez-vous</a></li>
 					</ul>
 				</li>
 				<li>

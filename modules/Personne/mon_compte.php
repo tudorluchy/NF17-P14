@@ -1,7 +1,4 @@
 
-<?php include_once(CLASSES."Animal.class.php"); ?>
-<?php include_once(CLASSES."Facture.class.php"); ?>
-
 <div id="moncompte">
 	<h1> <?php echo($_SESSION['user']->nom) ?></h1>  
 	<li><a href="?module=Personne&action=modification_compte">Modifier mes informations personnelles</a></li>
