@@ -1,8 +1,8 @@
 <?php 
-if (!isset($pers)) {
+if (!isset($produit)) {
 	echo("<h1>Création d'un nouveau produit</h1>");
 } else { 
-	echo("<h1>Modification du compte</h1>");
+	echo("<h1>Modification d'un produit</h1>");
 }
 ?>
 
@@ -10,18 +10,30 @@ if (!isset($pers)) {
 	<fieldset>
 		
 		<label for="nom">Nom :</label>
-		<input name="nom" type="text" id="nom" value="<?php if (isset($pers)) echo $pers->nom;?>">
+		<input name="nom" type="text" id="nom" value="<?php if (isset($produit)) echo $produit->nom;?>">
 		
 		<label for="stock">Stock :</label>
-		<input name="stock" type="text" id="stock" value="<?php if (isset($pers)) echo $pers->nom;?>">
+		<input name="stock" type="text" id="stock" value="<?php if (isset($produit)) echo $produit->stock;?>">
 		
 		<label for="prix">Prix :</label>
-		<input name="prix" type="text" id="prix" value="<?php if (isset($pers)) echo $pers->nom;?>">
+		<input name="prix" type="text" id="prix" value="<?php if (isset($produit)) echo $produit->prix;?>">
 		
 		<label for="p">Produit simple</label>
-		<input type="radio" name="type" value="produit" id="p">
+		<input type="radio" name="type" value="produit" id="p" 
+		<?php if (!Produit::isMedicament($produit->nom)) {
+		?>
+		checked
+		<?php 
+		} 
+		?>>
 		<label for="m">Medicament</label>
-		<input type="radio" name="type" value="medicament" id="m" checked>
+		<input type="radio" name="type" value="medicament" id="m"
+		<?php if (Produit::isMedicament($produit->nom)) {
+		?>
+		checked
+		<?php 
+		} 
+		?>>
 		
 		<div class="bloc_inscrip">
 			<input  type="reset" name="reset" value="Reset"/>

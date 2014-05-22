@@ -12,6 +12,7 @@
 		<th>Espece</th>
 		<th>Race</th>
 		<th>Prix</th>
+		<th>Modifier</th>
 	</tr>
 	<?php
 		foreach($liste_interventions as $intervention) {
@@ -35,6 +36,9 @@
 				else 	
 					 echo $intervention['prix'];
 				echo "</td>";
+				echo "<td>";
+					echo "<a href='?module=Personne&action=modifier_prestation&nom={$intervention['nom_inter']}'><img src='template/edit.png' title='Modifier une prestation'/></a>";
+				echo "</td";
 			echo"</tr>";
 		}
 	} else {
@@ -54,6 +58,7 @@
 		<th>Nom</th>
 		<th>Espece</th>
 		<th>Prix</th>
+		<th>Modifier</th>
 	</tr>
 	<?php
 		foreach($liste_consultations as $consultation) {
@@ -71,6 +76,9 @@
 				else 	
 					 echo $consultation['prix'];
 				echo "</td>";
+				echo "<td>";
+					echo "<a href='?module=Personne&action=modifier_prestation&nom={$consultation['nom']}'><img src='template/edit.png' title='Modifier une prestation'/></a>";
+				echo "</td";
 			echo"</tr>";
 		}
 	} else {

@@ -7,4 +7,5 @@
 	<li><a href="?module=Personne&action=employe_inscription_prestation">Création d'une nouvelle prestation</a></li>
 	<li><a href="?module=Personne&action=employe_liste_prestation">Liste des prestations avec leurs prix</a></li>
 	<li><a href="?module=Personne&action=employe_inscription_produit">Création d'un nouveau produit</a></li>
+	<li><a href="?module=Personne&action=employe_liste_produit">Liste des produits</a></li>
 </ul>

@@ -57,6 +57,15 @@ switch ( Form::get('action') ){
 	case 'employe_liste_prestation':
 		employe_liste_prestation();
 		break;
+	case 'modifier_prestation':
+		modifier_prestation();
+		break;
+	case 'employe_liste_produit':
+		employe_liste_produit();
+		break;
+	case 'modifier_produit':
+		modifier_produit();
+		break;
 	case 'validation_employe_inscription_espece':
 		validation_employe_inscription_espece();
 		break;
@@ -163,6 +172,33 @@ function employe_liste_prestation() {
 	$liste_interventions = Prestation::GetListeInterventionsAvecPrix();
 	$liste_consultations = Prestation::GetListeConsultationsAvecPrix();
 	include('employe_liste_prestation.php');
+}
+
+function employe_liste_produit() {
+	$liste_produits = Produit::GetListeProduits();
+	$liste_medicaments = Produit::GetListeMedicaments();
+	include('employe_liste_produit.php');
+}
+
+function modifier_produit() {
+	$nom_produit = Form::get('nom');
+	$produit = Produit::GetProduitByName($nom_produit);
+	include('employe_inscription_produit.php');
+}
+
+function modifier_prestation() {
+	$nom_prestation = Form::get('nom');
+	if (Prestation::isIntervention($nom_prestation)) {
+		$prestation = Prestation::GetInterventionAvecPrix($nom_prestation);
+		$prestation = $prestation[0];
+		$liste_especes = Espece::GetListeEspeces();
+		include('employe_modification_prestation_intervention.php');	
+	} else if ((Prestation::isConsultation($nom_prestation))) {
+		$prestation = Prestation::GetConsultationAvecPrix($nom_prestation);
+		$prestation = $prestation[0];
+		$liste_especes = Espece::GetListeEspeces();
+		include('employe_modification_prestation_consultation.php');
+	}
 }
 
 function mon_compte() {
@@ -313,11 +349,6 @@ function validation_employe_inscription_prestation() {
 }
 
 function validation_employe_inscription_produit() {
-	// problème : produit existe déjà
-	if (Produit::Existe(Form::get('nom'))) {
-		Site::message_info('Impossible de créer le produit puisque celui-ci existe déjà.');
-		Site::redirect("?module=Personne&action=employe_menu");
-	}
 	
 	$error[] = Site::verif_Text('nom', Form::get('nom'));
 	$error[] = Site::verif_Number('stock', Form::get('stock'));
@@ -327,17 +358,30 @@ function validation_employe_inscription_produit() {
 	if (!Site::affiche_erreur($error)) {
 		$produit = new Produit(Form::get('nom'), Form::get('stock'), Form::get('prix'));
 		
-		if (Form::get('type') == 'produit') {
-			$produit->Inserer();
-			Site::message_info('Le produit simple a correctement été créé');
-		} else if (Form::get('type') == 'medicament') {
-			$produit->Inserer(constant('MEDICAMENT'));
-			Site::message_info('Le médicament a correctement été créé');
-		} else {
-			Site::message_info('Les deux seuls types de produits possibles à créer sont Produit simple et Médicament.');
+		// inscription
+		if (!Produit::Existe(Form::get('nom'))) {
+			if (Form::get('type') == 'produit') {
+				$produit->Inserer();
+				Site::message_info('Le produit simple a correctement été créé');
+			} else if (Form::get('type') == 'medicament') {
+				$produit->Inserer(constant('MEDICAMENT'));
+				Site::message_info('Le médicament a correctement été créé');
+			} else {
+				Site::message_info('Les deux seuls types de produits possibles à créer sont Produit simple et Médicament.');
+			}
+		// modification
+		} else if (Produit::Existe(Form::get('nom'))) { 
+			$produit->Modifier();
+			if (Form::get('type') == 'produit') {
+				Produit::SupprimerMedicamentByName(Form::get('nom'));
+			} else if (Form::get('type') == 'medicament') {
+				Produit::AjouterMedicamentByName(Form::get('nom'));
+			}
+			Site::message_info('Le produit a correctement été modifié.');
 		}
-		Site::redirect("?module=Personne&action=employe_menu");
+		Site::redirect("?module=Personne&action=employe_liste_produit");
 	} else {
-		employe_inscription_produit();
+		Site::redirect("?module=Personne&action=employe_liste_produit");
+		//employe_inscription_produit();
 	}
 }

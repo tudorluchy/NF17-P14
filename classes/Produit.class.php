@@ -26,6 +26,42 @@ Class Produit {
 		}
 	}
 	
+	function Modifier() {	
+		$sql = "UPDATE tproduit SET nom='{$this->nom}',stock='{$this->stock}',prix='{$this->prix}' WHERE nom='{$this->nom}'";
+		$res=DB::Sql($sql);
+	}
+	
+	public static function GetListeProduits() {
+		$sql = "SELECT * FROM tproduit";
+		$res=DB::SqlToArray($sql);
+		
+		return $res;
+	}
+	
+	public static function GetListeMedicaments() {
+		$sql = "SELECT * FROM vmedicament";
+		$res=DB::SqlToArray($sql);
+		
+		return $res;
+	}
+	
+	public static function GetProduitByName($nom) {
+		$sql = "SELECT * FROM tproduit where nom='$nom'";
+		$res=DB::SqlToArray($sql);
+		
+		return new Produit($res[0]['nom'], $res[0]['stock'], $res[0]['prix']);
+	}
+	
+	public static function SupprimerMedicamentByName($nom) {
+		$sql = "DELETE FROM tmedicament where nom='$nom'";
+		$res=DB::Sql($sql);
+	}
+	
+	public static function AjouterMedicamentByName($nom) {
+		$sql = "INSERT INTO tmedicament VALUES ('$nom')";
+		$res=DB::Sql($sql);
+	}
+	
 	public static function Existe($nom) {
 		$sql = "select count(*) as nb from tproduit where nom='$nom'";
 		$res = DB::Sql($sql);
