@@ -25,6 +25,11 @@ Class PrixIntervention {
 		WHERE nom_race='{$this->nom_race}', nom_espece='{$this->nom_espece}', nom_inter='{$this->nom_inter}'";
 		$res=DB::Sql($sql);
 	}
+	
+	public static function SupprimerPrixIntervention($nom_race, $nom_espece, $nom_inter) {
+		$sql = "DELETE FROM prixintervention where nom_race='$nom_race' and nom_espece='$nom_espece' and nom_inter='$nom_inter'";
+		$res=DB::Sql($sql);
+	}
 
 	public static function Existe($nom_race, $nom_espece, $nom_inter) {
 		$sql = "select count(*) as nb from prixintervention where nom_race='$nom_race' and nom_espece='$nom_espece' and nom_inter='$nom_inter'";

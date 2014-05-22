@@ -48,6 +48,9 @@ switch ( Form::get('action') ){
 	case 'employe_inscription_race':
 		employe_inscription_race();
 		break;
+	case 'employe_liste_especes_races':
+		employe_liste_especes_races();
+		break;
 	case 'employe_inscription_prestation':
 		employe_inscription_prestation();
 		break;
@@ -71,6 +74,15 @@ switch ( Form::get('action') ){
 		break;
 	case 'modifier_produit':
 		modifier_produit();
+		break;
+	case 'supprimer_produit':
+		supprimer_produit();
+		break;
+	case 'supprimer_prix_intervention':
+		supprimer_prix_intervention();
+		break;
+	case 'supprimer_prix_consultation':
+		supprimer_prix_consultation();
 		break;
 	case 'validation_employe_inscription_espece':
 		validation_employe_inscription_espece();
@@ -172,6 +184,12 @@ function employe_inscription_race(){
 	include('employe_inscription_race.php');
 }
 
+function employe_liste_especes_races() {
+	$liste_especes = Espece::GetListeEspeces();
+	$liste_races = Race::GetListeRaces();
+	include('employe_liste_especes_races.php');
+}
+
 function employe_inscription_prestation(){
 	include('employe_inscription_prestation.php');
 }
@@ -210,6 +228,37 @@ function modifier_produit() {
 	$nom_produit = Form::get('nom');
 	$produit = Produit::GetProduitByName($nom_produit);
 	include('employe_inscription_produit.php');
+}
+
+function supprimer_produit() {
+	$nom_produit = Form::get('nom');
+	if (Produit::Existe($nom_produit)) {
+		Produit::SupprimerProduitCompletByName($nom_produit);
+		Site::message_info('Le produit '.$nom_produit.' a été supprimé.');
+	} else {
+		Site::message_info('Le produit '.$nom_produit.' n\'existe pas.');
+	}
+	employe_liste_produit();
+}
+
+function supprimer_prix_intervention() {
+	if (PrixIntervention::Existe(Form::get('nom_race'), Form::get('nom_espece'), Form::get('nom'))) {
+		PrixIntervention::SupprimerPrixIntervention(Form::get('nom_race'), Form::get('nom_espece'), Form::get('nom'));
+		Site::message_info('Le prix intervention a été supprimé.');
+	} else {
+		Site::message_info('Le prix intervention n\'existe pas.');
+	}
+	employe_liste_prestation();
+}
+
+function supprimer_prix_consultation() {
+	if (PrixConsultation::Existe(Form::get('nom_espece'), Form::get('nom'))) {
+		PrixConsultation::SupprimerPrixConsultation(Form::get('nom_espece'), Form::get('nom'));
+		Site::message_info('Le prix consultation a été supprimé.');
+	} else {
+		Site::message_info('Le prix consultation n\'existe pas.');
+	}
+	employe_liste_prestation();
 }
 
 function modifier_prestation() {
@@ -321,6 +370,7 @@ function validation_employe_inscription_espece() {
 		
 		$espece->Inserer();
 		Site::message_info('Votre espèce a correctement été créé');
+		employe_inscription_espece();
 	} else {
 		employe_inscription_espece();
 	}
@@ -341,6 +391,7 @@ function validation_employe_inscription_race() {
 		
 		$race->Inserer();
 		Site::message_info('Votre race a correctement été créé');
+		employe_inscription_race();
 	} else {
 		employe_inscription_race();
 	}
@@ -368,7 +419,7 @@ function validation_employe_inscription_prestation() {
 		} else {
 			Site::message_info('Les deux seuls types de prestations possibles à créer sont Intervention et Consultation.');
 		}
-		Site::redirect("?module=Personne&action=employe_menu");
+		employe_inscription_prestation();
 	} else {
 		employe_inscription_prestation();
 	}

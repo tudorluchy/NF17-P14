@@ -12,7 +12,7 @@
 		<th>Espece</th>
 		<th>Race</th>
 		<th>Prix</th>
-		<!-- <th>Modifier prix</th> -->
+		<th>Supprimer</th>
 	</tr>
 	<?php
 		foreach($liste_interventions as $intervention) {
@@ -36,15 +36,13 @@
 				else 	
 					 echo $intervention['prix'];
 				echo "</td>";
-				/*
 				echo "<td>";
-					if ($intervention['prix']) {
-						echo "<a href='?module=Personne&action=modifier_prestation&nom={$intervention['nom_inter']}'><img src='template/edit.png' title='Modifier une prestation'/></a>";
+					if (!empty($intervention['prix'])) {
+						echo "<a href='?module=Personne&action=supprimer_prix_intervention&nom={$intervention['nom_inter']}&nom_espece={$intervention['nom_espece']}&nom_race={$intervention['nom_race']}'><img src='template/delete.png' title='Supprimer un prix intervention'/></a>";
 					} else {
 						echo "<i>Impossible</i>";
 					}
 				echo "</td";
-				*/
 			echo"</tr>";
 		}
 	} else {
@@ -64,7 +62,7 @@
 		<th>Nom</th>
 		<th>Espece</th>
 		<th>Prix</th>
-		<!-- <th>Modifier prix</th> -->
+		<th>Supprimer</th>
 	</tr>
 	<?php
 		foreach($liste_consultations as $consultation) {
@@ -82,15 +80,13 @@
 				else 	
 					 echo $consultation['prix'];
 				echo "</td>";
-				/*
 				echo "<td>";
 					if (!empty($consultation['prix'])) {
-						echo "<a href='?module=Personne&action=modifier_prestation&nom={$consultation['nom']}'><img src='template/edit.png' title='Modifier une prestation'/></a>";
+						echo "<a href='?module=Personne&action=supprimer_prix_consultation&nom={$consultation['nom']}&nom_espece={$consultation['nom_espece']}'><img src='template/delete.png' title='Supprimer un prix consultation'/></a>";
 					} else {
 						echo "<i>Impossible</i>";
 					}
 				echo "</td";
-				*/
 			echo"</tr>";
 		}
 	} else {

@@ -51,6 +51,16 @@ Class Produit {
 		
 		return new Produit($res[0]['nom'], $res[0]['stock'], $res[0]['prix']);
 	}
+
+	public static function SupprimerProduitCompletByName($nom) {
+		$sql = "DELETE FROM tproduit where nom='$nom'";
+		$res=DB::Sql($sql);
+		
+		if (Produit::isMedicament($nom)) {
+			$sql = "DELETE FROM tmedicament where nom='$nom'";
+			$res=DB::Sql($sql);
+		}
+	}
 	
 	public static function SupprimerMedicamentByName($nom) {
 		$sql = "DELETE FROM tmedicament where nom='$nom'";

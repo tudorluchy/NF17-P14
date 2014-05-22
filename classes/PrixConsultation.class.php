@@ -23,6 +23,11 @@ Class PrixConsultation {
 		WHERE nom_espece='{$this->nom_espece}' and nom_consult='{$this->nom_consult}'";
 		$res=DB::Sql($sql);
 	}
+	
+	public static function SupprimerPrixConsultation($nom_espece, $nom_consult) {
+		$sql = "DELETE FROM prixconsultation where nom_espece='$nom_espece' and nom_consult='$nom_consult'";
+		$res=DB::Sql($sql);
+	}
 
 	public static function Existe($nom_espece, $nom_consult) {
 		$sql = "select count(*) as nb from prixconsultation where nom_espece='$nom_espece' and nom_consult='$nom_consult'";

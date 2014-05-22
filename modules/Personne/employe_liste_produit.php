@@ -13,6 +13,7 @@
 		<th>Prix</th>
 		<th>Medicament</th>
 		<th>Modifier</th>
+		<th>Supprimer</th>
 	</tr>
 	<?php
 		foreach($liste_produits as $produit) {
@@ -45,6 +46,9 @@
 				echo"</td>"; 
 				echo "<td>";
 					echo "<a href='?module=Personne&action=modifier_produit&nom={$produit['nom']}'><img src='template/edit.png' title='Modifier un produit'/></a>";
+				echo "</td>";
+				echo "<td>";
+					echo "<a href='?module=Personne&action=supprimer_produit&nom={$produit['nom']}'><img src='template/delete.png' title='Supprimer un produit'/></a>";
 				echo "</td";
 			echo"</tr>";
 		}
