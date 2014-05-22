@@ -1,24 +1,40 @@
 <!-- ICI JE NE MET QUE DU PHP!!! -->
 <?php
-Header::set_title("Veterinaire");
+Header::set_title("Employe");
 
-include(CLASSES."Veterinaire.class.php");
+include(CLASSES."Espece.class.php");
 include(INCLUDES."Session.class.php");
 
 switch ( Form::get('action') ){	
 	case 'ajout_animal':
 		ajout_animal();
 		break;
+	case 'ajout_rdv':
+		ajout_rdv();
+		break;
 	case 'validation_animal':
 		validation_animal();
 		break;
+	case 'test' :
+		test();
+		break;
 	default:
-		veterinaire();
+		Employe();
 		break;
 }
 
 function ajout_animal() {
+	//$espece = Espece::GetListeEspeces();
+	$espece[] = 'chien';
+	$espece[] = 'chat';
+	$espece[] = 'hamster';
 	include('ajout_animal.php');
+}
+
+function ajout_rdv() {
+	//$pers = Personne::GetListePersonnes();
+	//$vet = Veterinaire::GetListeVet();
+	include('ajout_rdv.php');
 }
 
 
@@ -50,6 +66,26 @@ function validation_animal() {
 	else {
 		include('ajout_animal.php');
 	}
+}
+
+
+function validation_animal() {
+	$rdv = new Rendez-vous(Form::get('date_rdv'), Form::get('tel_vet'), Form::get('tel_prop'));
+
+	$error[] = Site::verif_Date('Date du rendez-vous', Form::get('date_rdv'));
+		
+	$error[] = Site::verif_Telephone('Téléphone du propriétaire', Form::get('tel_prop'));
+	
+	$error[] = Site::verif_Telephone('Téléphone du propriétaire', Form::get('tel_vet'));
+	
+	if (!Site::affiche_erreur($error)) {
+		$rdv->Inserer();
+		Site::message_info("Le rendez-vous à correctement été ajouté");
+	}
+	else {
+		include('ajout_rdv.php');
+	}
+
 }
 
 

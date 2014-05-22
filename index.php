@@ -72,8 +72,8 @@
 				<li>
 					<a href="?module=Veterinaire">Rendez-vous</a>
 					<ul class="cbp-tm-submenu">
-						<li><a href="?module=Veterinaire&action=ajout_rdv">Ajouter un rendez-vous</a></li>
-						<li><a href="?module=Veterinaire&action=ajout_animal">Ajouter un animal</a></li>
+						<li><a href="?module=Employe&action=ajout_rdv">Ajouter un rendez-vous</a></li>
+						<li><a href="?module=Employe&action=ajout_animal">Ajouter un animal</a></li>
 					</ul>
 				</li>
 				<li>

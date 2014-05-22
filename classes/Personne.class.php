@@ -58,25 +58,6 @@ Class Personne {
 		$res=DB::Sql($sql);
 	}
 
-		//Méthodes statiques
-
-	/*
-	public static function ChercherParLogin($login) {
-		$sql = "select * from tclient where login='$login'";
-		$res = DB::Sql($sql);
-		$res2 = pg_fetch_assoc($res);
-		
-		// si login et mdp trouvés alors, il peut se connecter.
-		if (!empty($res2)) {
-			$c = new Client();
-			$c->Creer($res2['login'],$res2['mdp'],$res2['nom'],$res2['prenom'],$res2['adresse'],$res2['age'],$res2['adresse'],$res2['pointfidelite'],'client');
-			return $c;
-		} else {
-			return false;
-		}
-	}
-	
-	*/
 	
 	public static function Existe($telephone) {
 		$sql = "select count(*) as nb from tpersonne where telephone='$telephone'";
@@ -124,6 +105,12 @@ Class Personne {
 		} else {
 			return false;
 		}
+	}
+	
+	public static function GetListePersonnes() {
+		$sql = "SELECT * FROM tpersonne";
+		$res=DB::SqlToArray($sql);
+		return $res;
 	}
 	
 };
