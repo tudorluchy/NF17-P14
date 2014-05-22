@@ -20,15 +20,19 @@ if (!isset($produit)) {
 		
 		<label for="p">Produit simple</label>
 		<input type="radio" name="type" value="produit" id="p" 
-		<?php if (!Produit::isMedicament($produit->nom)) {
+		<?php if (isset($produit) && !Produit::isMedicament($produit->nom)) {
 		?>
 		checked
 		<?php 
-		} 
+		} else if (!isset($produit)) {
+		?>
+		checked
+		<?php
+		}
 		?>>
 		<label for="m">Medicament</label>
 		<input type="radio" name="type" value="medicament" id="m"
-		<?php if (Produit::isMedicament($produit->nom)) {
+		<?php if (isset($produit) && Produit::isMedicament($produit->nom)) {
 		?>
 		checked
 		<?php 

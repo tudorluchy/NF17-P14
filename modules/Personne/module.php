@@ -51,6 +51,12 @@ switch ( Form::get('action') ){
 	case 'employe_inscription_prestation':
 		employe_inscription_prestation();
 		break;
+	case 'employe_inscription_prestation_intervention_prix':
+		employe_inscription_prestation_intervention_prix();
+		break;
+	case 'employe_inscription_prestation_consultation_prix':
+		employe_inscription_prestation_consultation_prix();
+		break;
 	case 'employe_inscription_produit':
 		employe_inscription_produit();
 		break;
@@ -77,6 +83,12 @@ switch ( Form::get('action') ){
 		break;
 	case 'validation_employe_inscription_produit':
 		validation_employe_inscription_produit();
+		break;
+	case 'validation_employe_inscription_prestation_intervention_prix':
+		validation_employe_inscription_prestation_intervention_prix();
+		break;
+	case 'validation_employe_inscription_prestation_consultation_prix':
+		validation_employe_inscription_prestation_consultation_prix();
 		break;
 	default:
 		if (Session::ouverte()) { 
@@ -162,6 +174,19 @@ function employe_inscription_race(){
 
 function employe_inscription_prestation(){
 	include('employe_inscription_prestation.php');
+}
+
+function employe_inscription_prestation_intervention_prix() {
+	$liste_especes = Espece::GetListeEspeces();
+	$liste_interventions = Prestation::GetListeInterventions();
+	include('employe_inscription_prestation_intervention_prix.php');
+
+}
+
+function employe_inscription_prestation_consultation_prix() {
+	$liste_especes = Espece::GetListeEspeces();
+	$liste_consultations = Prestation::GetListeConsultations();
+	include('employe_inscription_prestation_consultation_prix.php');
 }
 
 function employe_inscription_produit(){
@@ -322,7 +347,7 @@ function validation_employe_inscription_race() {
 
 function validation_employe_inscription_prestation() {
 	// problème : prestation existe déjà
-	if (Espece::Existe(Form::get('nom'))) {
+	if (Prestation::Existe(Form::get('nom'))) {
 		Site::message_info('Impossible de créer la prestation puisque celle-ci existe déjà.');
 		Site::redirect("?module=Personne&action=employe_menu");
 	}
@@ -345,6 +370,34 @@ function validation_employe_inscription_prestation() {
 		Site::redirect("?module=Personne&action=employe_menu");
 	} else {
 		employe_inscription_prestation();
+	}
+}
+
+function validation_employe_inscription_prestation_intervention_prix() {
+
+}
+
+function validation_employe_inscription_prestation_consultation_prix() {
+
+	$error[] = Site::verif_Text('consultation', Form::get('consultation'));
+	$error[] = Site::verif_Text('espece', Form::get('espece'));
+	$error[] = Site::verif_Real('prix', Form::get('prix'));
+
+	if (!Site::affiche_erreur($error)) {
+		$prix_consultation = new PrixConsultation(Form::get('espece'), Form::get('consultation'), Form::get('prix'));
+
+		// inscription
+		if (!PrixConsultation::Existe(Form::get('espece'), Form::get('consultation'))) {
+			$prix_consultation->Inserer();
+			Site::message_info('Le prix a correctement été créé');
+		// modification
+		} else if (PrixConsultation::Existe(Form::get('espece'), Form::get('consultation'))) {
+			$prix_consultation->Modifier();
+			Site::message_info('Le prix a correctement été modifié.');
+		}
+		Site::redirect("?module=Personne&action=employe_liste_prestation");
+	} else {
+		employe_inscription_prestation_consultation_prix();
 	}
 }
 
@@ -381,7 +434,7 @@ function validation_employe_inscription_produit() {
 		}
 		Site::redirect("?module=Personne&action=employe_liste_produit");
 	} else {
-		Site::redirect("?module=Personne&action=employe_liste_produit");
-		//employe_inscription_produit();
+//		Site::redirect("?module=Personne&action=employe_liste_produit");
+		employe_inscription_produit();
 	}
 }

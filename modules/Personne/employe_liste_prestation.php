@@ -12,7 +12,7 @@
 		<th>Espece</th>
 		<th>Race</th>
 		<th>Prix</th>
-		<th>Modifier</th>
+		<!-- <th>Modifier prix</th> -->
 	</tr>
 	<?php
 		foreach($liste_interventions as $intervention) {
@@ -20,25 +20,31 @@
 				echo"<td>".$intervention['nom_inter']."</td>";
 				echo"<td>"; 
 				if (empty($intervention['nom_espece'])) 
-					echo "A definir...";
+					echo "<i>A definir...</i>";
 				else 	
 					 echo $intervention['nom_espece'];
 				echo "</td>";
 				echo"<td>"; 
 				if (empty($intervention['nom_race'])) 
-					echo "A definir...";
+					echo "<i>A definir...</i>";
 				else 	
 					 echo $intervention['nom_race'];
 				echo "</td>";
 				echo"<td>"; 
 				if (empty($intervention['prix'])) 
-					echo "A definir..."; 
+					echo "<i>A definir...</i>";
 				else 	
 					 echo $intervention['prix'];
 				echo "</td>";
+				/*
 				echo "<td>";
-					echo "<a href='?module=Personne&action=modifier_prestation&nom={$intervention['nom_inter']}'><img src='template/edit.png' title='Modifier une prestation'/></a>";
+					if ($intervention['prix']) {
+						echo "<a href='?module=Personne&action=modifier_prestation&nom={$intervention['nom_inter']}'><img src='template/edit.png' title='Modifier une prestation'/></a>";
+					} else {
+						echo "<i>Impossible</i>";
+					}
 				echo "</td";
+				*/
 			echo"</tr>";
 		}
 	} else {
@@ -58,7 +64,7 @@
 		<th>Nom</th>
 		<th>Espece</th>
 		<th>Prix</th>
-		<th>Modifier</th>
+		<!-- <th>Modifier prix</th> -->
 	</tr>
 	<?php
 		foreach($liste_consultations as $consultation) {
@@ -66,19 +72,25 @@
 				echo"<td>".$consultation['nom']."</td>";
 				echo"<td>"; 
 				if (empty($consultation['nom_espece'])) 
-					echo "A definir...";
+					echo "<i>A definir...</i>";
 				else 	
 					 echo $consultation['nom_espece'];
 				echo "</td>";
 				echo"<td>"; 
 				if (empty($consultation['prix'])) 
-					echo "A definir..."; 
+					echo "<i>A definir...</i>";
 				else 	
 					 echo $consultation['prix'];
 				echo "</td>";
+				/*
 				echo "<td>";
-					echo "<a href='?module=Personne&action=modifier_prestation&nom={$consultation['nom']}'><img src='template/edit.png' title='Modifier une prestation'/></a>";
+					if (!empty($consultation['prix'])) {
+						echo "<a href='?module=Personne&action=modifier_prestation&nom={$consultation['nom']}'><img src='template/edit.png' title='Modifier une prestation'/></a>";
+					} else {
+						echo "<i>Impossible</i>";
+					}
 				echo "</td";
+				*/
 			echo"</tr>";
 		}
 	} else {
