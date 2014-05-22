@@ -31,6 +31,7 @@
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="js/slider/jquery.bxslider.min.js"></script>
+		<script src="js/tuupola-jquery_chained-edd3742/jquery.chained.min.js"></script>
 		<link href="css/slider/jquery.bxslider.css" rel="stylesheet" />
 		<link href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 		<script type="text/javascript">
@@ -51,6 +52,11 @@
 				  nextText: "Suiv",
 				  yearRange: "1990:2014"
 				});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#race").chained("#espece"); /* or $("#series").chainedTo("#mark"); */
+			});
 		</script>
 	</head>
 	<body>

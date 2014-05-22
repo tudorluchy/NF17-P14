@@ -32,14 +32,14 @@ Class Produit {
 	}
 	
 	public static function GetListeProduits() {
-		$sql = "SELECT * FROM tproduit";
+		$sql = "SELECT * FROM tproduit order by nom asc";
 		$res=DB::SqlToArray($sql);
 		
 		return $res;
 	}
 	
 	public static function GetListeMedicaments() {
-		$sql = "SELECT * FROM vmedicament";
+		$sql = "SELECT * FROM vmedicament order by nom asc";
 		$res=DB::SqlToArray($sql);
 		
 		return $res;

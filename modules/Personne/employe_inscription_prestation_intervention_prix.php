@@ -27,11 +27,17 @@
 		?>
 		</select>
 
-		<!--
-		<label for="race">Nom race :</label>
-		<input name="race" type="text" id="race" readonly disabled value="<?php if (isset($prestation)) echo $prestation['nom_race'];?>">
-		 -->
-
+ 		<label>Nom race</label>
+		<select id='race' name='race' readonly>
+		<?php
+		foreach ($liste_races as $race) {
+		?>
+			<option value=<?php echo "'".$race['nom']."'"; ?> class=<?php echo "'".$race['espece']."'"; ?> <?php // echo "selected=selected"; ?> ><?php echo $race['nom']; ?></option>
+		<?php
+		}
+		?>
+		</select>
+		 
 		<label for="prix">Prix :</label>
 		<input name="prix" type="text" id="prix" value="<?php if (isset($prestation)) echo $prestation['prix'];?>">
 

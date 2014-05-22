@@ -178,6 +178,7 @@ function employe_inscription_prestation(){
 
 function employe_inscription_prestation_intervention_prix() {
 	$liste_especes = Espece::GetListeEspeces();
+	$liste_races = Race::GetListeRaces();
 	$liste_interventions = Prestation::GetListeInterventions();
 	include('employe_inscription_prestation_intervention_prix.php');
 
@@ -374,7 +375,28 @@ function validation_employe_inscription_prestation() {
 }
 
 function validation_employe_inscription_prestation_intervention_prix() {
+	
+	$error[] = Site::verif_Text('intervention', Form::get('intervention'));
+	$error[] = Site::verif_Text('espece', Form::get('espece'));
+	$error[] = Site::verif_Text('race', Form::get('race'));
+	$error[] = Site::verif_Real('prix', Form::get('prix'));
 
+	if (!Site::affiche_erreur($error)) {
+		$prix_intervention = new PrixIntervention(Form::get('race'), Form::get('espece'), Form::get('intervention'), Form::get('prix'));
+
+		// inscription
+		if (!PrixIntervention::Existe(Form::get('race'), Form::get('espece'), Form::get('intervention'))) {
+			$prix_intervention->Inserer();
+			Site::message_info('Le prix a correctement été créé');
+		// modification
+		} else if (PrixIntervention::Existe(Form::get('race'), Form::get('espece'), Form::get('intervention'))) {
+			$prix_intervention->Modifier();
+			Site::message_info('Le prix a correctement été modifié.');
+		}
+		Site::redirect("?module=Personne&action=employe_liste_prestation");
+	} else {
+		employe_inscription_prestation_intervention_prix();
+	}
 }
 
 function validation_employe_inscription_prestation_consultation_prix() {
