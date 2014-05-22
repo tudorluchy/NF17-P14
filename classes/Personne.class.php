@@ -111,7 +111,7 @@ Class Personne {
 	}
 
 	public static function isEmploye($telephone) {
-		$sql = "select count(*) as nb from temploye where telephone='$telephone'";
+		$sql = "select count(*) as nb from tEmploye where telephone='$telephone'";
 		$res = DB::Sql($sql);
 		if (!$res) {
 			return false;
