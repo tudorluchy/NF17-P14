@@ -80,6 +80,7 @@
 					<a href="?module=Veterinaire">Veterinaire</a>
 					<ul class="cbp-tm-submenu">
 						<li><a href="?module=Veterinaire" class="cbp-tm-icon-archive">Mes rendez-vous</a></li>
+						<li><a href="?module=Veterinaire&action=ajout_ordonnance" class="cbp-tm-icon-pencil">Prescrire une ordonnance</a></li>
 					</ul>
 				</li>
 				<li>

@@ -113,6 +113,18 @@ Class Personne {
 		return $res;
 	}
 	
+	public static function GetTelephoneVeterinaire() {
+		$sql = "SELECT telephone FROM tveterinaire";
+		$res=DB::SqlToArray($sql);
+		return $res;
+	}
+	
+	public static function GetListeVeterinaires() {
+		$sql = "SELECT * FROM tveterinaire";
+		$res=DB::SqlToArray($sql);
+		return $res;
+	}
+	
 };
 
 ?>

@@ -45,6 +45,12 @@ Class Animal {
 		var_dump($res);
 		die;
 	}
+	
+	public static function GetNomDossier() {
+		$sql = "SELECT num_dossier, nom FROM tanimal";
+		$res=DB::SqlToArray($sql);
+		return $res;
+	}
 };
 
 ?>

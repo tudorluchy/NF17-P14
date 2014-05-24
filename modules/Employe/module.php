@@ -33,7 +33,7 @@ function ajout_animal() {
 
 function ajout_rdv() {
 	//$pers = Personne::GetListePersonnes();
-	//$vet = Veterinaire::GetListeVet();
+	//$vet = Personne::GetListeVeterinaires();
 	include('ajout_rdv.php');
 }
 
