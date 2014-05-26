@@ -45,6 +45,13 @@ Class Produit {
 		return $res;
 	}
 	
+	public static function GetListeNomMedicaments() {
+		$sql = "SELECT nom FROM vmedicament order by nom asc";
+		$res=DB::SqlToArray($sql);
+		
+		return $res;
+	}
+	
 	public static function GetProduitByName($nom) {
 		$sql = "SELECT * FROM tproduit where nom='$nom'";
 		$res=DB::SqlToArray($sql);

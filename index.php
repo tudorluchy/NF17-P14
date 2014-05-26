@@ -69,31 +69,39 @@
 				<li>
 					<a href="?">Accueil</a>
 				</li>
+				<?php
+				if (Session::isConnected() && (Session::isEmploye() || Session::isAdmin())) { 	?>
+					<li>
+						<a href="?module=Employe">Employe</a>
+						<ul class="cbp-tm-submenu">
+							<li><a href="?module=Employe&action=ajout_rdv" class="cbp-tm-icon-archive">Ajouter un rendez-vous</a></li>
+							<li><a href="?module=Employe&action=ajout_animal" class="cbp-tm-icon-pencil">Ajouter un animal</a></li>
+						</ul>
+					</li>						
+				<?php } ?>	
+
+				<?php
+					if (Session::isConnected() && (Session::isVeterinaire() || Session::isAdmin())) { ?>
+						<li>
+							<a href="?module=Veterinaire">Veterinaire</a>
+							<ul class="cbp-tm-submenu">
+								<li><a href="?module=Veterinaire" class="cbp-tm-icon-archive">Mes rendez-vous</a></li>
+								<li><a href="?module=Veterinaire&action=ajout_ordonnance" class="cbp-tm-icon-pencil">Prescrire une ordonnance</a></li>
+							</ul>
+						</li>
+				<?php } ?>			
+
+				<?php if (Session::isConnected() && Session::isAdmin()) { ?>
 				<li>
-					<a href="?module=Employe">Employe</a>
+					<a href="?module=Personne&action=administration_menu">Administration</a>	
+										
+
 					<ul class="cbp-tm-submenu">
-						<li><a href="?module=Employe&action=ajout_rdv" class="cbp-tm-icon-archive">Ajouter un rendez-vous</a></li>
-						<li><a href="?module=Employe&action=ajout_animal" class="cbp-tm-icon-pencil">Ajouter un animal</a></li>
+						<li><a href="?module=Personne&action=administration_inscription" class="cbp-tm-icon-pencil">Ajout d'un Compte</a></li>
+						<li><a href="?module=Personne&action=administration_suppresion" class="cbp-tm-icon-screen">Suppression d'un Compte</a></li>	
 					</ul>
 				</li>
-				<li>
-					<a href="?module=Veterinaire">Veterinaire</a>
-					<ul class="cbp-tm-submenu">
-						<li><a href="?module=Veterinaire" class="cbp-tm-icon-archive">Mes rendez-vous</a></li>
-						<li><a href="?module=Veterinaire&action=ajout_ordonnance" class="cbp-tm-icon-pencil">Prescrire une ordonnance</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">Sweet melon</a>
-					<ul class="cbp-tm-submenu">
-						<li><a href="#" class="cbp-tm-icon-screen">Sorrel desert</a></li>
-						<li><a href="#" class="cbp-tm-icon-mail">Raisin kakadu</a></li>
-						<li><a href="#" class="cbp-tm-icon-contract">Plum salsify</a></li>
-						<li><a href="#" class="cbp-tm-icon-pencil">Bok choy celtuce</a></li>
-						<li><a href="#" class="cbp-tm-icon-article">Onion endive</a></li>
-						<li><a href="#" class="cbp-tm-icon-clock">Bitterleaf</a></li>
-					</ul>
-				</li>
+				<?php } ?>
 			</ul>
 			<div id="message_erreur"></div>
 			<div id="message_warning"></div>
@@ -119,27 +127,6 @@
 							<?php	}
 								else { ?>
 									<li><a href="?module=Personne&action=mon_compte">Mon Compte</a></li>
-									<?php
-									if (Session::isConnected() && Session::isAdmin()) {
-									?>
-										<li><a href="?module=Personne&action=administration_menu">Menu administration</a></li>
-									<?php
-									}
-									?>
-									<?php
-									if (Session::isConnected() && Session::isEmploye()) {
-									?>
-										<li><a href="?module=Personne&action=employe_menu">Menu employé</a></li>
-									<?php
-									}
-									?>
-									<?php
-									if (Session::isConnected() && Session::isVeterinaire()) {
-									?>
-										<li><a href="?module=Personne&action=veterinaire_menu">Menu vétérinaire</a></li>
-									<?php
-									}
-									?>
 									<li><a href="?module=Personne&action=deconnection">Se déconnecter</a></li>
 							<?php	}?>
 						</ul>

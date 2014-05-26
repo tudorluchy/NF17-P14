@@ -138,22 +138,22 @@ div#colonne_gauche,div#colonne_droite,div#contenu {
 }
 
 /* ----------- Mon Compte ----------- */
-#moncompte table {
+#corps table {
 	border: 3px groove #47a3da;
 	background : white;
 	
 }
-#moncompte tr {
+#corps tr {
 	border: 3px groove #47a3da;
 	padding : 0.5em;
 }
-#moncompte th{
+#corps th{
 	background : #47a3da;
 	padding : 0.5em;
 	font-weight: bold;
 	color : white;
 }
-#moncompte td {
+#corps td {
 	padding : 0.5em;
 }
 

@@ -27,7 +27,7 @@
 
   $(function() {
     var tel_vet = [
-      <?php foreach($vet as $v) echo("\"$v->telephone\",") ?>
+      <?php foreach($vet as $v) echo("\"0".$v['telephone']."\","); ?>
       ""
     ];
     $( "#tel_vet" ).autocomplete({
@@ -35,11 +35,11 @@
     });
 	
 	 var num_dossier = [
-      <?php foreach($animal as $a) echo("\"$a->num_dossier : $a->nom\",") ?>
+      <?php foreach($animal as $a) echo("\"".$a['num_dossier'] ." : " . $a['nom']."\","); ?>
       ""
     ];
     $( "#num_dossier" ).autocomplete({
-      source: tel_prop
+      source: num_dossier
     });
   });
 
