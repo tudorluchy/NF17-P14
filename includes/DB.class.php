@@ -39,7 +39,8 @@ class DB {
 		$res = self::Sql($requete);
 		$tab = array();
 		while ($row = pg_fetch_assoc($res)) {
-			$tab[] = str_replace("&quot;", "", $row);
+			//$tab[] = str_replace("&quot;", "", $row);
+			$tab[] = $row;
 		}
 		return $tab;	
 	}

@@ -277,7 +277,7 @@ function modifier_prestation() {
 }
 
 function mon_compte() {
-	$animal = Animal::mesanimaux($_SESSION['user']->telephone);	
+	$animal = Animal::mesanimaux($_SESSION['user']->telephone);
 	$facture = Facture::mesfactures($_SESSION['user']->telephone);
 	include('mon_compte.php');
 }

@@ -2,14 +2,8 @@
 
 <form  enctype="multipart/form-data" name="inscription" action="?module=Veterinaire&action=validation_ordonnance" method="POST">
 	<fieldset>
-		<label for="num_dossier">Numéro de dossier</label>
+		<label for="num_dossier">Numéro de dossier de l'animal</label>
 		<input name="num_dossier" type="text" id="num_dossier" value="<?php if(isset($ord)) echo($ord->num_dossier); ?>">
-		
-		<label for="date_ord">Date de l'ordonnance :</label>
-		<input name="date_ord" type="text" id="date_ord" value="<?php if(isset($ord)) echo($ord->date_ord); ?>">
-		
-		<label for="tel_vet">Téléphone du vétérinaire</label>
-		<input name="tel_vet" type="text" id="tel_vet" value="<?php if(isset($ord)) echo($ord->telephone); ?>">
 		
 		<div class="bloc_inscrip">
 			<input  type="reset" name="reset" value="Reset"/>
@@ -26,14 +20,6 @@
 
 
   $(function() {
-    var tel_vet = [
-      <?php foreach($vet as $v) echo("\"0".$v['telephone']."\","); ?>
-      ""
-    ];
-    $( "#tel_vet" ).autocomplete({
-      source: tel_vet
-    });
-	
 	 var num_dossier = [
       <?php foreach($animal as $a) echo("\"".$a['num_dossier'] ." : " . $a['nom']."\","); ?>
       ""

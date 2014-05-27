@@ -56,18 +56,16 @@ function ordonnance() {
 
 function ajout_ordonnance(){
 	$vet = Personne::GetTelephoneVeterinaire();
-	$animal = Animal::GetNomDossier();
+	$animal = Animal::GetNum_dossier();
 
 	include("ajout_ordonnance.php");
 }
 
 
 function validation_ordonnance(){
-	$ref = intval(uniqid());
-	$ord = new Ordonnance ($ref, Form::get('date_ord'),  Form::get('tel_vet'), Form::get('num_dossier'));
+	$ord = new Ordonnance (time(), $_SESSION['user']->telephone, Form::get('num_dossier'));
 	$error[] = Site::verif_Text('Numéro de dossier', Form::get('num_dossier'));
-	//$error[] = Site::verif_Date('Date de l\'ordonnance', Form::get('date_ord'));
-	$error[] = Site::verif_Telephone('Téléphone du vétérinaire', Form::get('tel_vet'));
+	
 	
 	if (!Site::affiche_erreur($error)) {
 			$res = $ord->inserer();

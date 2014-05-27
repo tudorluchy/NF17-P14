@@ -26,16 +26,11 @@ Class Animal {
 	}
 	
 	public static function mesanimaux($telephone) {
+
 		$sql = "SELECT * FROM tanimal WHERE telephone='$telephone'";
 		$res=DB::SqlToArray($sql);
-		
-		$res2 = array();
-		
-		foreach($res as $row) {
-			$res2[] = new Animal($row['num_dossier'], $row['nom'], $row['poids'], $row['taille'], $row['genre'], $row['date_naiss'], $row['photo'], $row['race'], $row['espece'], $row['telephone']);
-		}
-		
-		return $res2;
+
+		return $res;
 	}
 	
 
@@ -46,8 +41,8 @@ Class Animal {
 		die;
 	}
 	
-	public static function GetNomDossier() {
-		$sql = "SELECT num_dossier, nom FROM tanimal";
+	public static function GetNum_dossier() {
+		$sql = "SELECT num_dossier FROM tanimal";
 		$res=DB::SqlToArray($sql);
 		return $res;
 	}
