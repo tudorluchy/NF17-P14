@@ -1,12 +1,6 @@
- 
- 
-
-
-
-
 <h1>Ajout d'un nouvel animal</h1>
 
-<form  enctype="multipart/form-data" name="inscription" action="?module=Employe&action=validation_animal" method="POST">
+<form  enctype="multipart/form-data" name="validation_animal" action="?module=Personne&action=valiadtion_animal" method="POST">
 	<fieldset>
 		
 		<label for="num_dossier">Numéro de dossier :</label>

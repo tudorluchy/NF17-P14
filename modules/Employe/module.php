@@ -1,8 +1,11 @@
-<!-- ICI JE NE MET QUE DU PHP!!! -->
 <?php
 Header::set_title("Employe");
 
 include(CLASSES."Espece.class.php");
+include(CLASSES."RendezVous.class.php");
+include(CLASSES."Animal.class.php");
+include(CLASSES."Personne.class.php");
+
 include(INCLUDES."Session.class.php");
 
 switch ( Form::get('action') ){	
@@ -15,19 +18,16 @@ switch ( Form::get('action') ){
 	case 'validation_animal':
 		validation_animal();
 		break;
-	case 'test' :
-		test();
+	case 'validation_rdv':
+		validation_rdv();
 		break;
-	default:
-		Employe();
-		break;
+	// default:
+		// Employe();
+		//break;
 }
 
 function ajout_animal() {
-	//$espece = Espece::GetListeEspeces();
-	$espece[] = 'chien';
-	$espece[] = 'chat';
-	$espece[] = 'hamster';
+	$espece = Espece::GetListeEspeces();
 	include('ajout_animal.php');
 }
 
@@ -40,7 +40,7 @@ function ajout_rdv() {
 
 function validation_animal() {
 	$animal = new Animal(Form::get('num_dossier'), Form::get('nom'), Form::get('poids'), Form::get('taille'), Form::get('genre'), Form::get('date_naiss'), Form::get('race'), Form::get('espece'), Form::get('telephone'));
-
+	
 	$error[] = Site::verif_Text('Numéro de dossier', Form::get('num_dossier'));
 	
 	$error[] = Site::verif_Text('Nom', Form::get('nom'));
@@ -69,14 +69,15 @@ function validation_animal() {
 }
 
 
-function validation_animal() {
-	$rdv = new Rendez-vous(Form::get('date_rdv'), Form::get('tel_vet'), Form::get('tel_prop'));
-
+function validation_rdv() {
+	$rdv = new RendezVous(Form::get('date_rdv'), Form::get('tel_vet'), Form::get('tel_prop'), Form::get('num_dossier'), Form::get('duree') );
+	var_dump($rdv);
+	
 	$error[] = Site::verif_Date('Date du rendez-vous', Form::get('date_rdv'));
 		
-	$error[] = Site::verif_Telephone('Téléphone du propriétaire', Form::get('tel_prop'));
+	$error[] = Site::verif_Telephone('Téléphone du vétérinaire', Form::get('tel_prop'));
 	
-	$error[] = Site::verif_Telephone('Téléphone du propriétaire', Form::get('tel_vet'));
+	$error[] = Site::verif_Telephone('Téléphone de l\'employé', Form::get('tel_vet'));
 	
 	if (!Site::affiche_erreur($error)) {
 		$rdv->Inserer();
