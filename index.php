@@ -22,18 +22,19 @@
 			echo '<link rel="icon" type="image/png" href="'.Header::get_favicon().'"/>'; 
 			header('X-Frame-Options: GOFORIT'); 
 		?>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<!-- Css -->
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="css/menu/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/menu/component.css" />
+		<link href="css/slider/jquery.bxslider.css" rel="stylesheet" />
+		<link href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+		
 		<script src="js/menu/modernizr.custom.js"></script>
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="js/slider/jquery.bxslider.min.js"></script>
 		<script src="js/tuupola-jquery_chained-edd3742/jquery.chained.min.js"></script>
-		<link href="css/slider/jquery.bxslider.css" rel="stylesheet" />
-		<link href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 		<script type="text/javascript">
 		$(document).ready(function(){
 			  $('.bxslider').bxSlider();

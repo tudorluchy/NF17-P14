@@ -1,4 +1,5 @@
-<!-- ICI JE NE MET QUE DU PHP!!! -->
+<!-- Module Facture -->
+
 <?php
 Header::set_title("Facture");
 

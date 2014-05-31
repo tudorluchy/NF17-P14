@@ -1,4 +1,5 @@
-<!-- ICI JE NE MET QUE DU PHP!!! -->
+<!-- Module Par défaut -->
+
 <?php
 Header::set_title("Clinique vétérinaire");
 

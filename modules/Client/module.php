@@ -1,4 +1,5 @@
-<!-- ICI JE NE MET QUE DU PHP!!! -->
+<!-- Module Client -->
+
 <?php
 Header::set_title("Module  : Client");
 
