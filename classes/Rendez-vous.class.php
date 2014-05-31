@@ -9,6 +9,7 @@ Class Rendez-vous{
 	public $num_dossier;
 	public $race;
 	public $espece;	
+	public $duree;
 	
 	function __construct($dateRDV, $telVet, $telEmp, $num_dossier, $race, $espece){
 		$this->dateRDV = $date;

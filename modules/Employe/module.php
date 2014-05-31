@@ -1,4 +1,3 @@
-<!-- ICI JE NE MET QUE DU PHP!!! -->
 <?php
 Header::set_title("Employe");
 
@@ -69,14 +68,16 @@ function validation_animal() {
 }
 
 
-function validation_animal() {
-	$rdv = new Rendez-vous(Form::get('date_rdv'), Form::get('tel_vet'), Form::get('tel_prop'));
+function validation_rdv() {
+	$rdv = new Rendez-vous(Form::get('date_rdv'), Form::get('duree'), Form::get('tel_vet'), Form::get('tel_prop'));
 
 	$error[] = Site::verif_Date('Date du rendez-vous', Form::get('date_rdv'));
-		
-	$error[] = Site::verif_Telephone('Téléphone du propriétaire', Form::get('tel_prop'));
 	
-	$error[] = Site::verif_Telephone('Téléphone du propriétaire', Form::get('tel_vet'));
+	$error[] = Site::verif_Number('Duree du rendez-vous', Form::get('duree'));
+		
+	$error[] = Site::verif_Telephone('Téléphone de l\'employé', Form::get('tel_prop'));
+	
+	$error[] = Site::verif_Telephone('Téléphone du vétérinaire', Form::get('tel_vet'));
 	
 	if (!Site::affiche_erreur($error)) {
 		$rdv->Inserer();

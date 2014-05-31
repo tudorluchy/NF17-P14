@@ -59,7 +59,9 @@
 			});
 		</script>
 	</head>
-	<body>
+	<body onload="initialiser()">
+		<div id="carte" style="width:100%; height:100%"></div>
+		
 		<div id='page'>
 			<div id='header'>
 				<h1>Clinique vétérinaire</h1>

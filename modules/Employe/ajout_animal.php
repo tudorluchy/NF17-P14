@@ -1,9 +1,3 @@
- 
- 
-
-
-
-
 <h1>Ajout d'un nouvel animal</h1>
 
 <form  enctype="multipart/form-data" name="inscription" action="?module=Employe&action=validation_animal" method="POST">
