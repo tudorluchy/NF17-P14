@@ -1,3 +1,5 @@
+<!-- Module Client -->
+
 <?php
 Header::set_title("Module  : Client");
 

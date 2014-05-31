@@ -1,3 +1,29 @@
+/* Page d'accueil */
+#corps h2 {
+	background : lightblue;
+	color : white;
+	clear : left;
+	padding : 2px 2px 2px 20px;
+	border-radius : 5px;
+}
+#corps img {
+	float : left;	
+	margin : 10px;
+}
+
+#corps ul {
+	min-height: 100px;
+	padding : 10px;
+	float : left;
+}
+
+#corps ul li {
+	padding : 3px;	
+	list-style-type:none;
+}
+
+
+
 /* Mon compte */
 #moncompte h2 {
 	margin-top : 2em;
@@ -11,13 +37,11 @@
 
 }
 
-
-
-
 #corps {
 	padding-top: 2em;
 	background : white;
-
+	float : left;
+	width : 1000px;
 }
 
 
@@ -73,6 +97,8 @@ background-image:   radial-gradient(50% 50%, ellipse closest-side, white, lightb
 #contenu {
 	background: white;
 	padding: 1em;
+	width : 750px;
+	float : left;
 }
 
 #contenu h1 {
@@ -81,7 +107,8 @@ background-image:   radial-gradient(50% 50%, ellipse closest-side, white, lightb
 	padding : 0.3em;
 	color : white;
 	margin-bottom : 0.8em;
-	margin-left : 210px;
+	float : left;
+	width : 100%;
 }
 
 #contenu option,#contenu input,#contenu select,#contenu textarea,#file {
@@ -128,9 +155,16 @@ h2 {
 }
 
 #footer {
-	background-color: rgb(150, 150, 150);
-	min-height: 8em;
+	background-color: rgb(180, 180, 180);
+	min-height: 5em;
 	clear: both;
+	width : 1000px;
+	margin : auto;
+	color : white;
+}
+
+#footer p {
+	padding : 20px;
 }
 
 div#colonne_gauche,div#colonne_droite,div#contenu {

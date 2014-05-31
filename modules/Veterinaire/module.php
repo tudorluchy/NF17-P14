@@ -1,3 +1,5 @@
+<!-- Module Vétérinaire -->
+ 
 <?php
 Header::set_title("Vétérinaire");
 
@@ -46,7 +48,8 @@ function validation_finale_ordonnance() {
 }
 
 function ordonnance() {
-	$ord = Ordonnance::GetOrdonnance(Form::get('ref'));
+	$ord = Ordonnance::GetDerniereOrdonnance();
+	var_dump($ord);
 	$instr= Instruction::GetInstructions(Form::get('ref'));
 
 	include("ordonnance.php");
@@ -62,7 +65,8 @@ function ajout_ordonnance(){
 
 
 function validation_ordonnance(){
-	$ord = new Ordonnance (time(), $_SESSION['user']->telephone, Form::get('num_dossier'));
+	$last_ref = Ordonnance::getMaxReference();
+	$ord = new Ordonnance ($last_ref['max']+1, time(), $_SESSION['user']->telephone, Form::get('num_dossier'));
 	$error[] = Site::verif_Text('Numéro de dossier', Form::get('num_dossier'));
 	
 	

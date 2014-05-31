@@ -13,15 +13,9 @@
 </form>	 
 
 <script>
- 
-  $(function() {
-    $( "#date_ord" ).datepicker();
-  });
-
-
   $(function() {
 	 var num_dossier = [
-      <?php foreach($animal as $a) echo("\"".$a['num_dossier'] ." : " . $a['nom']."\","); ?>
+      <?php foreach($animal as $a) echo("\"".$a['num_dossier']."\","); ?>
       ""
     ];
     $( "#num_dossier" ).autocomplete({

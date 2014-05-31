@@ -1,3 +1,5 @@
+<!-- Module Personne -->
+
 <?php
 Header::set_title("Personne");
 

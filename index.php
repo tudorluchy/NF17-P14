@@ -22,18 +22,19 @@
 			echo '<link rel="icon" type="image/png" href="'.Header::get_favicon().'"/>'; 
 			header('X-Frame-Options: GOFORIT'); 
 		?>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<!-- Css -->
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="css/menu/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/menu/component.css" />
+		<link href="css/slider/jquery.bxslider.css" rel="stylesheet" />
+		<link href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+		
 		<script src="js/menu/modernizr.custom.js"></script>
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="js/slider/jquery.bxslider.min.js"></script>
 		<script src="js/tuupola-jquery_chained-edd3742/jquery.chained.min.js"></script>
-		<link href="css/slider/jquery.bxslider.css" rel="stylesheet" />
-		<link href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 		<script type="text/javascript">
 		$(document).ready(function(){
 			  $('.bxslider').bxSlider();
@@ -52,15 +53,12 @@
 				  nextText: "Suiv",
 				  yearRange: "1990:2014"
 				});
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#race").chained("#espece"); /* or $("#series").chainedTo("#mark"); */
-			});
+
+			$("#race").chained("#espece");
 		</script>
 	</head>
-	<body onload="initialiser()">
-		<div id="carte" style="width:100%; height:100%"></div>
+	
+	<body>
 		
 		<div id='page'>
 			<div id='header'>
@@ -71,8 +69,17 @@
 				<li>
 					<a href="?">Accueil</a>
 				</li>
+				<li>
+					<a href="?module=default&action=equipe">L'équipe</a>
+				</li>
+				<li>
+					<a href="?module=default&action=plan_acces">Plan d'accès</a>
+				</li>
+				<li>
+					<a href="?module=default&action=partenaires">Partenaires</a>
+				</li>					
 				<?php
-				if (Session::isConnected() && (Session::isEmploye() || Session::isAdmin())) { 	?>
+				if (Session::isConnected() && (Session::isEmploye())) { 	?>
 					<li>
 						<a href="?module=Employe">Employe</a>
 						<ul class="cbp-tm-submenu">
@@ -92,7 +99,7 @@
 				<?php } ?>	
 
 				<?php
-					if (Session::isConnected() && (Session::isVeterinaire() || Session::isAdmin())) { ?>
+					if (Session::isConnected() && (Session::isVeterinaire())) { ?>
 						<li>
 							<a href="?module=Veterinaire">Veterinaire</a>
 							<ul class="cbp-tm-submenu">
@@ -143,18 +150,27 @@
 						</ul>
 					</div>
 						<div id="bloc">
+							<h3>Coordonnées</h3>
+							<hr>
+							<ul>
+								<li>Rue Roger Couttolenc</li>
+								<li>60203 Compiègne Cedex</li>
+								<li>+33 3 44 23 44 23</li>
+								<li><a href="mailto:srp@utc.fr">Contact BF</a></p></li>
+							</ul>
+						</div>
+					
+						<div id="bloc">
 							<h3>Utilisateurs en ligne</h3>
 							<hr>
-							<p><?php
+							<ul><?php
 							if (empty($_SESSION['user']->telephone))
-									echo('Il y a actuellement 0 utilisateur connecté.');
+									echo('<li> Il y a actuellement 0 utilisateur connecté. </li>');
 							else {
 								echo('Les utilisateurs connectés sont : ');
-								echo ('<ul>');
 								echo ("<li>". $_SESSION['user']->nom ."</li>");
-								echo ('</ul>');
 							} ?>
-							</p>
+							</ul>
 						</div>
 						
 						<div style='clear: both'></div>
@@ -177,7 +193,7 @@
 				</div>
 			</div>
 		<div id='footer'>
-			Texte footer
+			<p><b>NF17 - SUJET N°1 : CLINIQUE VETERINAIRE </b><br><br>Tudor Luchiancenco - Clémence Geffray - Thibault Brocheton - Benoît Sénéchal</p>
 		</div>
 		<script src="js/menu/cbpTooltipMenu.min.js"></script>
 		<script>

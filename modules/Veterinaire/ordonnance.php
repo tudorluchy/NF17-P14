@@ -1,4 +1,4 @@
-<h1>Ordonnance <?php if(isset($ord->reference)) echo($ord->reference);?>  </h1>
+<h1>Ordonnance n°<?php if(isset($ord->reference)) echo($ord->reference);?>  </h1>
 
 	<ul>
 		<li><b>Numéro de dossier : </b><?php if(isset($ord->num_dossier)) echo($ord->num_dossier);?> </li>
