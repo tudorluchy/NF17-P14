@@ -1,6 +1,6 @@
 <h1>Ajout d'un nouvel animal</h1>
 
-<form  enctype="multipart/form-data" name="validation_animal" action="?module=Personne&action=valiadtion_animal" method="POST">
+<form  enctype="multipart/form-data" name="validation_animal" action="?module=Employe&action=valiadtion_animal" method="POST">
 	<fieldset>
 		
 		<label for="num_dossier">Numéro de dossier :</label>
@@ -24,13 +24,27 @@
 		<label for="date_naiss">Date de naissance :</label>
 		<input name="date_naiss" type="text" id="date_naiss" value="<?php if (isset($animal)) echo $animal->date_naiss; ?>">
 		
-		<label for="espece">Espece :</label>
-		<select name ="espece" id="espece" >
-		<?php foreach ($espece as $e) echo("<option>$e</option>");?>
+		<label for="espece">Espèce :</label>
+		<select id='espece' name='espece' readonly>
+		<?php
+		foreach ($espece as $e) {
+		?>
+			<option value=<?php echo "'".$e['nom']."'"; ?>><?php echo $e['nom']; ?></option>
+		<?php
+		}
+		?>
 		</select>
-		
-		<label for="race">Race :</label>
-		<select name="race"  id="race"> </select>
+	
+	 	<label for="race">Race :</label>
+		<select id='race' name='race' readonly>
+		<?php
+		foreach ($race as $r) {
+		?>
+			<option value=<?php echo "'".$r['nom']."'"; ?>><?php echo $r['nom']; ?></option>
+		<?php
+		}
+		?>
+		</select>
 		
 		<label for="telephone">Télephone du propriétaire :</label>
 		<input name="telephone" type="text" id="telephone" value="<?php if (isset($animal)) echo $animal->telephone; ?>">

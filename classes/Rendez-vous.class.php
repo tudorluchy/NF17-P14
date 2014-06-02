@@ -1,42 +1,46 @@
 <?php
 
-Class RendezVous{
+Class Rendez-vous{
 
 	//Attributs
 	public $dateRDV;
 	public $telVet;
 	public $telEmp;
 	public $num_dossier;
-	public $duree;
+	public $race;
+	public $espece;	
 	
-	function __construct($dateRDV, $telVet, $telEmp, $num_dossier, $duree){
-		$this->dateRDV = $dateRDV;
-		$this->telVet = $telVet;
+	function __construct($dateRDV, $telVet, $telEmp, $num_dossier, $race, $espece){
+		$this->dateRDV = $date;
+		$this->telVet = $heureFin;
 		$this->telEmp = $telEmp;
 		$this->num_dossier = $num_dossier;
-		$this->duree = $duree;
+		$this->race = $race;
+		$this->espece = $espece;
 	}
 	
 	function Inserer(){
-		$sql = "INSERT INTO tRendezvous VALUES ('{$this->dateRDV}', '{$this->telVet}', '{$this->telEmp}', '{$this->num_dossier}', '{$this->duree}'); ";
+		$sql = "INSERT INTO tRendezvous VALUES ('{$this->dateRDV}', '{$this->telVet}', '{$this->telEmp}', '{$this->num_dossier}', '{$this->race}', '{$this->espece}') ";
 		$res=DB::Sql($sql);
+		var_dump($res);
+		die;
 	}
 	
 	public static function GetListeRDV(){
 		$sql = "SELECT * from tRendezvous";
-		$sres = DB::SqlToArray($sql);
+		res = DB::SqlToArray($sql);
 		return $res;
 	}
 	
 	public static function GetListeRDV1veto($telVet){
 		$sql = "SELECT * from tRendezvous where telephone_vet='$telVet'";
-		$res = DB::SqlToArray($sql);
+		res = DB::SqlToArray($sql);
 		return $res;
 	}
 	
 	
 	function Supprimer(){
-		$sql="DELETE FROM tRendezvous WHERE date_rdv='{$dateRDV}' and telephone_vet='{$telVet}' and num_dossier='{$num_dossier}'";
+		$sql="DELETE FROM tRendezvous WHERE date_rdv='{$dateRDV}' and telephone_vet='{$telVet}' and num_dossier='{$num_dossier}'"
 		$res = DB::Sql($sql);
 	}
 	

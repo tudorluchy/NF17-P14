@@ -30,6 +30,7 @@ switch ( Form::get('action') ){
 
 function ajout_animal() {
 	$espece = Espece::GetListeEspeces();
+	$race = Race::GetListeRaces();
 	include('ajout_animal.php');
 }
 
@@ -41,7 +42,10 @@ function ajout_rdv() {
 
 
 function validation_animal() {
+	echo("Coucou");
+	die;
 	$animal = new Animal(Form::get('num_dossier'), Form::get('nom'), Form::get('poids'), Form::get('taille'), Form::get('genre'), Form::get('date_naiss'), Form::get('race'), Form::get('espece'), Form::get('telephone'));
+	var_dump($animal);
 	
 	$error[] = Site::verif_Text('Numéro de dossier', Form::get('num_dossier'));
 	
@@ -51,7 +55,7 @@ function validation_animal() {
 	
 	$error[] = Site::verif_Text('Taille', Form::get('taille'));
 	
-	$error[] = Site::verif_Date('Date de naissance', Form::get('date_naiss'));
+	//$error[] = Site::verif_Date('Date de naissance', Form::get('date_naiss'));
 	
 	$error[] = Site::verif_Text('Race', Form::get('race'));
 	
@@ -73,9 +77,9 @@ function validation_animal() {
 
 function validation_rdv() {
 	$rdv = new RendezVous(Form::get('date_rdv'), Form::get('tel_vet'), Form::get('tel_prop'), Form::get('num_dossier'), Form::get('duree') );
-	var_dump($rdv);
+	//var_dump($rdv); //OK
 	
-	$error[] = Site::verif_Date('Date du rendez-vous', Form::get('date_rdv'));
+	//$error[] = Site::verif_Date('Date du rendez-vous', Form::get('date_rdv'));
 		
 	$error[] = Site::verif_Telephone('Téléphone du vétérinaire', Form::get('tel_prop'));
 	
@@ -86,6 +90,7 @@ function validation_rdv() {
 		Site::message_info("Le rendez-vous à correctement été ajouté");
 	}
 	else {
+		
 		include('ajout_rdv.php');
 	}
 
