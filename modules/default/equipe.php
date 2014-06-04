@@ -2,7 +2,7 @@
 
 <h2>Tudor Luchiancenco - Chef de projet</h2>
 
-<img src="template/Tudor.jpg" width="120px"/>
+<img src="template/Tudor.png" width="120px"/>
 <ul>
     <li>Etudiant à l'UTC</li>
     <li>GI05</li>
@@ -12,7 +12,7 @@
 
 <h2>Benoît Sénéchal - Responsable conception</h2>
 
-<img src="template/Benoit.jpg" width="120px"/>
+<img src="template/Benoit.png" width="120px"/>
 <ul>
     <li>Etudiant Apprenti à l'UTC</li>
     <li>GI02</li>
@@ -22,7 +22,7 @@
 	
 <h2>Thibault Brocheton - Responsable développement</h2>
 
-<img src="template/Thibault.jpg" width="120px"/>
+<img src="template/Thibault.png" width="120px"/>
 <ul>
     <li>Etudiant à l'UTC</li>
     <li>GI02</li>
@@ -32,7 +32,7 @@
 
 <h2>Clémence Geffray - Responsable qualité</h2>
 
-<img src="template/Clemence.jpg" width="120px"/>
+<img src="template/Clemence.png" width="120px"/>
 <ul>
     <li>Etudiante Apprentie à l'UTC</li>
     <li>GI02</li> 
