@@ -22,7 +22,10 @@
 	list-style-type:none;
 }
 
-
+a.facture, a.facture:visited, a.facture:hover{
+	text-decoration: none;
+	color : white;
+}
 
 /* Mon compte */
 #moncompte h2 {
@@ -42,6 +45,10 @@
 	background : white;
 	float : left;
 	width : 1000px;
+}
+
+fieldset {
+	float:left;
 }
 
 

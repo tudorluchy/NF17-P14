@@ -9,8 +9,8 @@
 			<input  type="reset" name="reset" value="Reset"/>
 			<input  type="submit" name="valider" value="Valider"/>	
 		</div>
-	</fieldset>			
-</form>	 
+	</fieldset>
+</form>
 
 <script>
   $(function() {

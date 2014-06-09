@@ -1,17 +1,15 @@
+<h1>Consulter les rendez-vous</h1>
 
-<div id="mes_rdv">		
-		
-	<h1>Tous mes rendez-vous : </h1>
-		<?php 
-		
-		foreach ($rdv_veto as $rdv)
-		{
-		?>
-			
-		<h2>
+<?php
+
+foreach ($liste_rdv as $rdv)
+{
+?>
+	
+	<h2>
 		Rendez-vous du <?php echo $rdv['date_rdv']; ?>
 		avec animal numéro <?php echo $rdv['num_dossier']; ?>
-		</h2>
+	</h2>
 
 		<table>
 			<tr>
@@ -32,6 +30,3 @@
 <?php
 }
 ?>
-		
-		
-</div>

@@ -19,7 +19,7 @@ define("TAILLETEL", 10);
 define("MAXTEXTAREA", 20000);
 define("MINTEXTAREA", 2);  
 
-define("DATES", "^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$");	
+define("DATES", "`(\d{1,2})/(\d{1,2})/(\d{4})`");	
 
 define("MAIL", '#^([a-zA-Z0-9]+(([\.\-\_]?[a-zA-Z0-9]+)+)?)\@(([a-zA-Z0-9]+[\.\-\_])+[a-zA-Z])#');
 define("MAXMAIL", 30);
@@ -323,10 +323,12 @@ class Site {
 				$error = "Veuillez remplir le champ '".$champs."' svp";
 		else { 
 			if(! preg_match(DATES, $date))
+			{
 				if ($champs == '')
 					$error = "Veuillez remplir correctement ce champ svp";
 				else
-					$error = "Veuillez remplir correctement le champ '".$champs."' svp";
+					$error = "Veuillez remplir MOJILUGYJ correctement le champ '".$champs."' svp";
+			}
 		}
 	
 		return ($error);

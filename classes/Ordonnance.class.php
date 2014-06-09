@@ -17,7 +17,7 @@ Class Ordonnance {
 	
 
 	function Inserer(){
-		$sql = "INSERT INTO tordonnance VALUES ('{$this->reference}','{$this->date_ord}','{$this->telephone}','{$this->num_dossier}';)";
+		$sql = "INSERT INTO tordonnance VALUES ('{$this->reference}','{$this->date_ord}','{$this->telephone}','{$this->num_dossier}')";
 		return $res=DB::Sql($sql);
 	}
 	
@@ -28,6 +28,12 @@ Class Ordonnance {
 		$vResult = pg_fetch_array($res);
 		
 		return new Ordonnance($vResult['reference'], $vResult['date_ord'], $vResult['telephone'], $vResult['num_dossier']);
+	}
+	
+		public static function GetListeOrdonnance() {
+	
+		$sql = "SELECT * FROM tordonnance";
+		return DB::SqlToArray($sql);
 	}
 	
 	public static function GetDerniereOrdonnance() {
@@ -41,7 +47,7 @@ Class Ordonnance {
 	
 	public static function GetMaxReference() {
 	
-		$sql = "SELECT max(reference) FROM tordonnance GROUP BY reference;";
+		$sql = "SELECT max(reference) FROM tordonnance";
 		
 		return pg_fetch_array(DB::Sql($sql));
 	}

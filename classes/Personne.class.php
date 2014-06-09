@@ -124,7 +124,18 @@ Class Personne {
 		$res=DB::SqlToArray($sql);
 		return $res;
 	}
+
+	public static function GetTelephonePersonnes() {
+	$sql = "SELECT telephone FROM tpersonne";
+	$res=DB::SqlToArray($sql);
+	return $res;
+	}
 	
+	public static function GetTelephoneEmploye() {
+	$sql = "SELECT telephone FROM temploye";
+	$res=DB::SqlToArray($sql);
+	return $res;
+	}
 };
 
 ?>

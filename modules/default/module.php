@@ -9,9 +9,6 @@ switch ( Form::get('action') ){
 	case 'equipe':
 		afficher_equipe();
 		break;
-	case 'plan_acces':
-		plan_acces();
-		break;
 	case 'partenaires':
 		partenaires();
 		break;
@@ -28,9 +25,6 @@ function afficher_equipe(){
 	include('equipe.php');
 }
 
-function plan_acces(){
-	include('plan.php');
-}
 
 function partenaires(){
 	include('partenaires.php');

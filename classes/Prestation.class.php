@@ -56,6 +56,11 @@ Class Prestation {
 		return $res;
 	}
 	
+	public static function GetListePrestation() {
+		$sql = "SELECT * FROM tprestation";
+		return DB::SqlToArray($sql);
+	}
+	
 	public static function GetInterventionAvecPrix($nom) {
 		$sql = "SELECT i.nom_inter, pi.nom_espece, pi.nom_race, pi.prix FROM tintervention i LEFT JOIN prixintervention pi ON i.nom_inter = pi.nom_inter
 		WHERE i.nom_inter='$nom'";

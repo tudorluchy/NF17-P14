@@ -21,6 +21,10 @@ switch ( Form::get('action') ){
 			ordonnance();
 			break;
 		
+		case 'mes_rdv':
+			mes_rdv();
+			break;
+		
 		case 'validation_finale_ordonnance' :
 			validation_finale_ordonnance();
 			break;	
@@ -35,10 +39,12 @@ switch ( Form::get('action') ){
 			validation_instruction();
 			break;
 		default :
-			mes_rdv();
+			liste_ordonnance();
 }
 
 function mes_rdv() {
+	$telVet=$_SESSION['user']->telephone;
+	$rdv_veto = RendezVous::GetListeRDV1veto($telVet);
 	include("mes_rdv.php");
 }
 
@@ -49,7 +55,6 @@ function validation_finale_ordonnance() {
 
 function ordonnance() {
 	$ord = Ordonnance::GetDerniereOrdonnance();
-	var_dump($ord);
 	$instr= Instruction::GetInstructions(Form::get('ref'));
 
 	include("ordonnance.php");
@@ -63,18 +68,21 @@ function ajout_ordonnance(){
 	include("ajout_ordonnance.php");
 }
 
+function liste_ordonnance(){
+	$ord = Ordonnance::GetListeOrdonnance();
+	include("liste_ordonnance.php");
+}
 
 function validation_ordonnance(){
 	$last_ref = Ordonnance::getMaxReference();
-	$ord = new Ordonnance ($last_ref['max']+1, time(), $_SESSION['user']->telephone, Form::get('num_dossier'));
-	$error[] = Site::verif_Text('Numéro de dossier', Form::get('num_dossier'));
-	
+	$ord = new Ordonnance ($last_ref['max']+1, date('j/m/Y'), $_SESSION['user']->telephone, Form::get('num_dossier'));
+	$error[] = Site::verif_Number('Numéro de dossier', Form::get('num_dossier'));
 	
 	if (!Site::affiche_erreur($error)) {
 			$res = $ord->inserer();
 			if (isset ($res)) {
 				Site::message_info('Votre prescription a correctement été enregistrée');
-				Site::redirect("?module=Veterinaire&action=ordonnance&ref=".$ref);
+				Site::redirect("?module=Veterinaire&action=ordonnance&ref=".$last_ref['max']);
 			}
 			else  {
 				Site::message_info('Problème lors de la création de l\'ordonnance');

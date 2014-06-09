@@ -24,12 +24,12 @@ Class RendezVous{
 	
 	public static function GetListeRDV(){
 		$sql = "SELECT * from tRendezvous";
-		$sres = DB::SqlToArray($sql);
+		$res = DB::SqlToArray($sql);
 		return $res;
 	}
 	
 	public static function GetListeRDV1veto($telVet){
-		$sql = "SELECT * from tRendezvous where telephone_vet='$telVet'";
+		$sql = "SELECT * from tRendezvous where telephone_vet='{$telVet}'";
 		$res = DB::SqlToArray($sql);
 		return $res;
 	}

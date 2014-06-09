@@ -1,5 +1,5 @@
 <?php
-	echo("<h1>Création d'un prix pour une consultation</h1>");
+	echo("<h1>Création d'un prix consultation</h1>");
 ?>
 
 <form  enctype="multipart/form-data" name="inscription" action="?module=Personne&action=validation_employe_inscription_prestation_consultation_prix" method="POST">

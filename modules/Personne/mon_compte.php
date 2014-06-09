@@ -22,6 +22,7 @@
 			<th> </th>
 		</tr>
 		<?php
+			var_dump($animal);
 			foreach ($animal as $a) {
 			echo("<tr><td>".$a['nom']."</td><td>".$a['poids']."</td><td>".$a['taille']."</td><td>".$a['genre']."</td><td>".$a['date_naiss']."</td><td>".$a['race']."</td><td>".$a['espece']."</td><td><div id='modifier'><a href='?module=Animal&action=modifier&animal=$a->num_dossier'><img src='template/icone_modifier.png'/></a></div></td><td><div id='supprimer'><a href='?module=Animal&action=supprimer&animal=$a->num_dossier'><img src='template/icone_supprimer.png'/></a></div></td></tr>"); 
 			
