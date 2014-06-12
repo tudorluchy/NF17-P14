@@ -1,14 +1,13 @@
-
-<div id="Ordonnances">		
+	
 		
 	<h1>Liste des Ordonnances</h1>
 	<table>
 		<tr>
-			<td>Reference</td>
-			<td>Date Création</td>
-			<td>Telephone Client</td>
-			<td>Dossier Animal</td>
-			<td>Actions</td>
+			<th>Reference</th>
+			<th>Date Création</th>
+			<th>Telephone Vétérinaire</th>
+			<th>Dossier Animal</th>
+			<th>Actions</th>
 		</tr>
 	
 	<?php		
@@ -29,4 +28,3 @@
 ?>
 </table>
 		
-</div>

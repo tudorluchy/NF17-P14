@@ -5,7 +5,7 @@
 <img src="template/Tudor.png" width="120px"/>
 <ul>
 <li>Etudiant à l'UTC</li>
-    <li>GI05</li>
+    <li>GI06</li>
     <li>Filière SRI</li>
     <li>Diplômé d'un DUT d'Informatique (juin 2011)</li>
 </ul>

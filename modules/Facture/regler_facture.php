@@ -12,7 +12,7 @@
 		</select>
 		
 		<label for="date_reglement">Date de Règlement:</label>
-		<input name="date_reglement" type="text" id="date_reglement" value="<?php if (isset($facture)) echo $facture->date_reglement;?>">
+		<input name="date_reglement" type="date" id="date_reglement" value="<?php if (isset($facture)) echo $facture->date_reglement;?>">
 		
 		<input type='hidden' value='<?php echo $_GET['facture']; ?>' name='ref'>
 
@@ -23,7 +23,7 @@
 		
 	</fieldset>			
 </form>	 
-
+<!--
  <script>
  
   $(function() {
@@ -36,5 +36,5 @@
 
 </script>
 
-
+-->
 
